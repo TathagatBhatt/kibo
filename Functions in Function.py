@@ -1,10 +1,60 @@
 import string
 import random
 import os
+import turtle
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import unpad
+def Turtle_Menu():
+    def Square():
+        for i in range(4):
+            turtle.forward(100)
+            turtle.right(90)
+        turtle.done()
+    def Circle():
+        turtle.circle(100,370)
+        turtle.done
+    def ChessBoard():
+        sc = turtle.Screen()
+        pen = turtle.Turtle()
+
+        def draw():
+            for i in range(4):
+                pen.forward(30)
+                pen.left(90)
+            pen.forward(30)
+
+        sc.setup(600, 600)
+        pen.speed(100)
+        for i in range(8):
+            pen.up()
+            pen.setpos(0, 30 * i)
+            pen.down()
+            for j in range(8):
+                if (i + j) % 2 == 0:
+                    col = 'black'
+                else:
+                    col = 'white'
+                pen.fillcolor(col)
+                pen.begin_fill()
+                draw()
+                pen.end_fill()
+        pen.hideturtle()
+        turtle.done()
+    while True:
+        print("***Turtle Menu*** \n1.ChessBoard \n2.Circle \n3.Square \n4.Exit")
+        Choice = input("Select An Option:")
+        if Choice == "1":
+            ChessBoard()
+        if Choice == "2":
+            Circle()
+        if Choice == "3":
+            Square()
+        if Choice == "4":
+            confermation = input("Are You Sure ? \n")
+            if confermation.lower() == "yes":
+                break
 def DECRYPTION():
     encrypted_data = input("Enter the encrypted data: ")
     key = input("Enter the key: ")
@@ -75,7 +125,7 @@ def Stack():
     def is_empty():
         return len(stack) == 0
     while True:
-        print("STACK MENU")
+        print("***STACK MENU***")
         print("1. Push")
         print("2. Pop")
         print("3. Display")
@@ -144,7 +194,8 @@ def Encryptor():
             print(DECRYPT())
         if Choice == "5":
             Confrimation = input("Are You Sure ? \n")
-            Confrimation.lower() == "yes"
+            if Confrimation.lower() == "yes":
+                break
 def Calculate():
     def addition():
         Result = X+Y
@@ -197,7 +248,7 @@ def Calculate():
                 break
 def main_menu():
     while True :
-        print("***FUNCTION MENU***\n 1.Password Function\n 2.Stack Function\n 3.Calculator \n 4.Encryption")
+        print("***FUNCTION MENU***\n 1.Password Function\n 2.Stack Function\n 3.Calculator \n 4.Encryption \n 5.Turtle Graphic \n 6.Exit")
         Choice = input("Select a Function:")
         if Choice == "1":
             main()
@@ -207,4 +258,10 @@ def main_menu():
             Calculate()
         if Choice == "4":
             Encryptor()
+        if Choice == "5":
+            Turtle_Menu()
+        if Choice == "6":
+            confermation = input("Are You Sure ? \n")
+            if confermation.lower() == "yes":
+                break
 main_menu()
