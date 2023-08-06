@@ -4,8 +4,108 @@ import os
 import turtle
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
-from Crypto.Cipher import AES
-from Crypto.Util.Padding import unpad
+import pickle
+from collections import Counter
+def most_frequently_used_function():
+    most_common_function = Counter(function_usage).most_common(1)
+    return most_common_function[0][0]
+function_usage = {
+    "Password Function": 0,
+    "Stack Function": 0,
+    "Calculator": 0,
+    "Encryption": 0,
+    "Turtle Graphic": 0,
+    "File Function": 0
+}
+def Rainbow_spiral():
+    l=['red','blue','black','green','black','yellow']
+    turtle.speed(1000)
+    for i in range(1,400):
+        turtle.circle(i/5)
+        turtle.right(13)
+        if i %10==1:
+            turtle.color(random.choice(l))
+    for i in range(200):
+      for j in range(500):
+          pass
+def read_txt():
+    File_Name = input("Enter File Name : ")
+    File = open(File_Name+".txt","r")
+    print(File.read())
+def append_text():
+    File_Name = input("Enter File Name : ")
+    Content = input("Enter Content:")
+    File = open(File_Name+".txt","a")
+    File.write("\n"+Content)
+def write_text():
+    File_Name = input("Enter File Name : ")
+    Content = input("Enter Content:")
+    File = open(File_Name+".txt","w")
+    File.write(Content)
+def File_Handle_Menu():
+    while True:
+        print("***File Menu*** \n 1.TEXT FILE \n 2.BINARY FILE \n 3.EXIT")
+        Choice = int(input("Select An Option:"))
+        if Choice == 1:
+            while True:
+                print("***TEXT FULE MENU*** \n1.Write(Previous Data Will Be Lost)\n2.Append \n3.Read\n4.Exit")
+                Choice = int(input("Select An Option:"))
+                if Choice == 1:
+                    write_text()
+                if Choice == 2:
+                    append_text()
+                if Choice == 3:
+                  read_txt()
+                if Choice == 4:
+                  confrimation = input("Are You Sure \n")
+                  if confrimation == "yes":
+                          break
+        if Choice == 2:
+            while True:
+                print("***BINARY FULE MENU*** \n1.Write(Previous Data Will Be Lost)\n2.Append \n3.Read\n4.Exit")
+                Choice = int(input("Select An Option:"))
+                if Choice == 1:
+                    write_binary()
+                if Choice == 2:
+                    append_binary()
+                if Choice == 3:
+                  read_binary()
+                if Choice == 4:
+                  confrimation = input("Are You Sure \n")
+                  if confrimation == "yes":
+                          break
+        if Choice == 3:
+            confrimation = input("Are You Sure \n")
+            if confrimation == "yes":
+                break
+class MyClass:
+    def __init__(self, value):
+        self.value = value
+def write_binary():
+    File_Name = input("Enter File Name : ")
+    Extension = input("Enter The Desired Extension Of The File :")
+    Content = input("Enter Content:")
+    my_data = MyClass(Content)
+    with open(File_Name+"."+Extension, "wb") as f:
+        pickle.dump(my_data, f)
+def read_binary():
+    File_Name = input("Enter File Name : ")
+    Extension = input("Enter The Desired Extension Of The File :")
+    with open(File_Name + "." + Extension, "rb") as f:
+        while True:
+            try:
+                my_data = pickle.load(f)
+                print(my_data.value)
+            except EOFError:
+                break
+def append_binary():
+    File_Name = input("Enter File Name : ")
+    Extension = input("Enter The Desired Extension Of The File :")
+    Content = input("Enter Content:")
+    my_data = MyClass(Content)
+    with open(File_Name+"."+Extension, "ab") as f:
+        pickle.dump(my_data, f)
+
 def Turtle_Menu():
     def Square():
         for i in range(4):
@@ -43,7 +143,7 @@ def Turtle_Menu():
         pen.hideturtle()
         turtle.done()
     while True:
-        print("***Turtle Menu*** \n1.ChessBoard \n2.Circle \n3.Square \n4.Exit")
+        print("***Turtle Menu*** \n1.ChessBoard \n2.Circle \n3.Square \n4.RainBow Spiral\n5.Exit")
         Choice = input("Select An Option:")
         if Choice == "1":
             ChessBoard()
@@ -52,6 +152,8 @@ def Turtle_Menu():
         if Choice == "3":
             Square()
         if Choice == "4":
+            Rainbow_spiral()
+        if Choice == "5":
             confermation = input("Are You Sure ? \n")
             if confermation.lower() == "yes":
                 break
@@ -247,21 +349,31 @@ def Calculate():
             if confirmation.lower() == "yes" :
                 break
 def main_menu():
-    while True :
-        print("***FUNCTION MENU***\n 1.Password Function\n 2.Stack Function\n 3.Calculator \n 4.Encryption \n 5.Turtle Graphic \n 6.Exit")
+    while True:
+        print("***FUNCTION MENU***\n1. Password Function\n2. Stack Function\n3. Calculator\n4. Encryption\n5. Turtle Graphic\n6. File Function\n7. History\n8. Exit")
         Choice = input("Select a Function:")
         if Choice == "1":
             main()
-        if Choice == "2":
+            function_usage["Password Function"] += 1
+        elif Choice == "2":
             Stack()
-        if Choice == "3":
+            function_usage["Stack Function"] += 1
+        elif Choice == "3":
             Calculate()
-        if Choice == "4":
+            function_usage["Calculator"] += 1
+        elif Choice == "4":
             Encryptor()
-        if Choice == "5":
+            function_usage["Encryption"] += 1
+        elif Choice == "5":
             Turtle_Menu()
-        if Choice == "6":
-            confermation = input("Are You Sure ? \n")
-            if confermation.lower() == "yes":
+            function_usage["Turtle Graphic"] += 1
+        elif Choice == "6":
+            File_Handle_Menu()
+            function_usage["File Function"] += 1
+        elif Choice == "7":
+            print("Most frequently used function:", most_frequently_used_function())
+        elif Choice == "8":
+            confirmation = input("Are You Sure?\n")
+            if confirmation.lower() == "yes":
                 break
 main_menu()
