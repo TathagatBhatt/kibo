@@ -8,7 +8,6 @@ import pickle
 from collections import Counter
 import math
 import numpy as np
-import scipy.special
 def most_frequently_used_function():
     most_common_function = Counter(function_usage).most_common(1)
     return most_common_function[0][0]
@@ -265,23 +264,23 @@ def main():
         if choice == "1":
             pass_len = int(input("Enter the length of your password:"))
             password = generate_password(pass_len, string.digits)
-            print(password)
+            print("The Generated Password Is:",password)
         elif choice == "2":
             pass_len = int(input("Enter the length of your password:"))
             password = generate_password(pass_len, string.ascii_letters + string.digits)
-            print(password)
+            print("The Generated Password Is:",password)
         elif choice == "3":
             pass_len = int(input("Enter the length of your password:"))
             password = generate_password(pass_len, string.ascii_letters)
-            print(password)
+            print("The Generated Password Is:",password)
         elif choice == "4":
             pass_len = int(input("Enter the length of your password:"))
             password = generate_password(pass_len, string.ascii_lowercase)
-            print(password)
+            print("The Generated Password Is:",password)
         elif choice == "5":
             pass_len = int(input("Enter the length of your password:"))
             password = generate_password(pass_len, string.ascii_uppercase)
-            print(password)
+            print("The Generated Password Is:",password)
         elif choice == "6":
             confirmation = input("Are you sure?\n")
             if confirmation.lower() == "yes":
@@ -305,25 +304,25 @@ def Encryptor():
 def Calculate():
     def addition():
         Result = X+Y
-        print (Result)
+        print (Y,"added to",X,"gives:",Result)
     def subtract():
         Result = X-Y
-        print (Result)
+        print (Y,"Subtracted from",X, "is",Result)
     def multiplie():
         Result = X*Y
-        print (Result)
+        print (X,"multiplied by",Y,Result)
     def devide():
         Result = X/Y
-        print (Result)
+        print (X,"devide by",Y,"is:",Result)
     def square():
         Result = X**Y
-        print (Result)
+        print (X,"raised to the power",Y,Result)
     def percentage():
         Result = X/Y * 100
-        print (Result)
+        print ("The Percentage is:",Result)
     def Factorial():
         Result = math.factorial(X)
-        print (Result)
+        print ("The Factorial of","X","is:",Result)
     while True:
         print("***Ca1culator Menu***\n 1.Addition\n 2.Subtract\n 3.Multiplie \n 4.Devide \n 5.Square\n 6.Percentage\n 7.Factorial \n 8.Exit")
         Choice = input("Select An Option:")
