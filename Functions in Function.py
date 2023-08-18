@@ -6,6 +6,9 @@ from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
 import pickle
 from collections import Counter
+import math
+import numpy as np
+import scipy.special
 def most_frequently_used_function():
     most_common_function = Counter(function_usage).most_common(1)
     return most_common_function[0][0]
@@ -28,6 +31,7 @@ def Rainbow_spiral():
     for i in range(200):
       for j in range(500):
           pass
+      turtle.bye()
 def read_txt():
     File_Name = input("Enter File Name : ")
     File = open(File_Name+".txt","r")
@@ -114,7 +118,7 @@ def Turtle_Menu():
         turtle.done()
     def Circle():
         turtle.circle(100,370)
-        turtle.done
+        turtle.done()
     def ChessBoard():
         sc = turtle.Screen()
         pen = turtle.Turtle()
@@ -317,8 +321,11 @@ def Calculate():
     def percentage():
         Result = X/Y * 100
         print (Result)
+    def Factorial():
+        Result = math.factorial(X)
+        print (Result)
     while True:
-        print("***Ca1culator Menu***\n 1.Addition\n 2.Subtract\n 3.Multiplie \n 4.Devide \n 5.Square\n 6.Percentage\n 7.Exit")
+        print("***Ca1culator Menu***\n 1.Addition\n 2.Subtract\n 3.Multiplie \n 4.Devide \n 5.Square\n 6.Percentage\n 7.Factorial \n 8.Exit")
         Choice = input("Select An Option:")
         if Choice == "1":
             X = float(input("ENTER NUMBER:"))
@@ -330,7 +337,7 @@ def Calculate():
             subtract()
         if Choice == "3":
             X = float(input("ENTER THE NUMBER:"))
-            Y = float(input("ENTER THE NUMBER:"))
+            Y = float(input("ENTER THE NUMBER TO BE MULTIPLIED WITH:"))
             multiplie()
         if Choice == "4":
             X = float(input("ENTER DIVIDEND:"))
@@ -345,6 +352,9 @@ def Calculate():
             Y = float(input("ENTER THE TOTAL AMOUNT:"))
             percentage()
         if Choice == "7":
+            X = int(input("ENTER THE NUMBER:"))
+            Factorial()
+        if Choice == "8":
             confirmation = input("Are you sure \n")
             if confirmation.lower() == "yes" :
                 break
