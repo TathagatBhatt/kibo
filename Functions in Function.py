@@ -310,13 +310,13 @@ def Calculate():
         print (Y,"Subtracted from",X, "is:",Result)
     def multiplie():
         Result = X*Y
-        print (X,"multiplied by:",Y,Result)
+        print (X,"multiplied by",Y,"is:",Result)
     def devide():
         Result = X/Y
         print (X,"devide by",Y,"is:",Result)
     def square():
         Result = X**Y
-        print (X,"raised to the power:",Y,Result)
+        print (X,"raised to the power",Y,"is:",Result)
     def percentage():
         Result = X/Y * 100
         print ("The Percentage is:",Result)
