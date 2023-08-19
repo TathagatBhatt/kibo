@@ -307,22 +307,22 @@ def Calculate():
         print (Y,"added to",X,"gives:",Result)
     def subtract():
         Result = X-Y
-        print (Y,"Subtracted from",X, "is",Result)
+        print (Y,"Subtracted from",X, "is:",Result)
     def multiplie():
         Result = X*Y
-        print (X,"multiplied by",Y,Result)
+        print (X,"multiplied by:",Y,Result)
     def devide():
         Result = X/Y
         print (X,"devide by",Y,"is:",Result)
     def square():
         Result = X**Y
-        print (X,"raised to the power",Y,Result)
+        print (X,"raised to the power:",Y,Result)
     def percentage():
         Result = X/Y * 100
         print ("The Percentage is:",Result)
     def Factorial():
         Result = math.factorial(X)
-        print ("The Factorial of","X","is:",Result)
+        print ("The Factorial of",X,"is:",Result)
     while True:
         print("***Ca1culator Menu***\n 1.Addition\n 2.Subtract\n 3.Multiplie \n 4.Devide \n 5.Square\n 6.Percentage\n 7.Factorial \n 8.Exit")
         Choice = input("Select An Option:")
