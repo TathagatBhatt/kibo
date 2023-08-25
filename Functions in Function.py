@@ -8,6 +8,132 @@ import pickle
 from collections import Counter
 import math
 import numpy as np
+def Questions():
+    points = 0
+    Ans1 = ["Neil A.","Alden Armstrong","Neil Armstrong","Neil Alden Armstrong"]
+    Ans2 = ["sun","Sun","SUN"]
+    Ans3 = ["Everest","Mt.Everest","Mount Everest"]
+    Ans4 = ["moon","MOON","Moon"]
+    Ans5 = ["Pluto","pluto","PLUTO"]
+    Ans6 =["Homosapiens","HOMOSAPIENS","Homo Sapiens","Homo sapiens","Homo-sapiens","Homo-Sapiens","Homosapien","HOMOSAPIEN","Homo Sapien","Homo sapien","Homo-sapien","Homo-Sapien"]
+    Ans7 =["Gravity","gravity","GRAVITY"]
+    Ans8 =["mammals","MAMMALS","mammal","MAMMAL"]
+    Ans9 =["Aryabhata","Aryabhatt","ARYABHATA","ARYABHATT","aryabhatt","aryabhata"]
+    Ans10=["east","East","EAST"]
+    while True :
+        print("Who was the first man to step on moon ? \n")
+        Answer = input("")
+        if Answer in Ans1:
+            print("CORRECT ANSWER!!!!")
+            points +=1
+        if Answer not in Ans1:
+            print("INCORRECT ANSWER!!!!")
+            pass
+        while True:
+            print("Name the largest star in our so1ar system  \n")
+            Answer = input("")
+            if Answer in Ans2:
+                print("CORRECT ANSWER!!!!")
+                points +=1
+            if Answer not in Ans2:
+                print("INCORRECT ANSWER!!!!")
+                pass
+            while True:
+                print("What's The Highest Mountain Cliff ? \n")
+                Answer = input("")
+                if Answer in Ans3:
+                    points +=1
+                    print("CORRECT ANWSER!!!!")
+                if Answer not in Ans3:
+                    print("INCORRECT ANSWER!!!!")
+                    pass
+                while True:
+                    print("What is the of the natural satellite ? \n")
+                    Answer = input("")
+                    if Answer in Ans4:
+                        print("CORRECT ANWSER!!!!")
+                        points +=1
+                    if Answer not in Ans4:
+                        print("INCORRECT ANSWER!!!!")
+                        pass
+                    while True :
+                        print("Name The Dwarf Planet In Our Solar System  \n")
+                        Answer = input("")
+                        if Answer in Ans5 :
+                            print("CORRECT ANWSER!!!!")
+                            points += 1
+                        if Answer not in Ans5 :
+                            print("INCORRECT ANSWER!!!!")
+                            pass
+                        while True :
+                            print("What is the scientific name of humans ? \n")
+                            Answer = input("")
+                            if Answer in Ans6:
+                                print("CORRECT ANWSER!!!!")
+                                points +=1
+                            if Answer not in Ans6:
+                                print("INCORRECT ANSWER!!!!")
+                                pass
+                            while True:
+                                print("Name the force which pulls us to the ground \n")
+                                Answer = input("")
+                                if Answer in Ans7:
+                                    print("CORRECT ANWSER!!!!")
+                                    points +=1
+                                if Answer not in Ans7:
+                                    print("INCORRECT ANSWER!!!!")
+                                    pass
+                                while True:
+                                    print("Name the type of animal that milkfeed their babies \n")
+                                    Answer = input("")
+                                    if Answer in Ans8:
+                                        print("CORRECT ANWSER!!!!")
+                                        points +=1
+                                    if Answer not in Ans8:
+                                        print("INCORRECT ANSWER!!!!")
+                                        pass
+                                    while True:
+                                        print("Who disocvered zero ? \n")
+                                        Answer = input("")
+                                        if Answer in Ans9:
+                                             print("CORRECT ANWSER!!!!")
+                                             points += 1
+                                        if Answer not in Ans9:
+                                            print("INCORRECT ANSWER!!!!")
+                                            pass
+                                        print("From which direction does sun rise from ? \n")
+                                        Answer = input("")
+                                        if Answer in Ans10:
+                                            print("CORRECT ANWSER!!!!")
+                                            points += 1
+                                        if Answer not in Ans10:
+                                            print("INCORRECT ANSWER!!!!")
+                                            pass
+                                        Name = input("Enter Your First Name :")
+                                        while points <=5:
+                                            print("Congrats",Name,"You Scored",points,"points ! Nice Try")
+                                            return
+                                        while points <= 8:
+                                            print("Congrats",Name,"You Scored",points,"points ! Great Job!")
+                                            return
+                                        while points <= 10:
+                                            print("Congrats",Name,"You Scored",points,"points ! Perfect!")
+                                            return
+                    
+def Quiz():               
+    while True:
+        print("***General Know1edge Quiz*** \n1.Start Quiz \n2.Exit")
+        Choice = input("Se1ect An Option :")
+        if Choice == "2":
+            break
+        if Choice == "1":
+            while True :
+                print("***Ru1es*** \n1.This Quiz Has 10 questions \n2.you'll be rewarded 1 point for each correct answer \n3. There's no negative Marking \n4.points system: \n 1-5 points Nice Try \n 6-8 Great Job! \n 9-10 Perfect!!")
+                Choice = input("Do you wish to continue (yes/no):")
+                if Choice.lower()== "no":
+                    break
+                if Choice.lower()== "yes":
+                    Questions()
 def most_frequently_used_function():
     most_common_function = Counter(function_usage).most_common(1)
     return most_common_function[0][0]
@@ -17,7 +143,8 @@ function_usage = {
     "Calculator": 0,
     "Encryption": 0,
     "Turtle Graphic": 0,
-    "File Function": 0
+    "File Function": 0,
+    "Quiz" : 0
 }
 def Rainbow_spiral():
     l=['red','blue','black','green','black','yellow']
@@ -359,7 +486,7 @@ def Calculate():
                 break
 def main_menu():
     while True:
-        print("***FUNCTION MENU***\n1. Password Function\n2. Stack Function\n3. Calculator\n4. Encryption\n5. Turtle Graphic\n6. File Function\n7. History\n8. Exit")
+        print("***FUNCTION MENU***\n1. Password Function\n2. Stack Function\n3. Calculator\n4. Encryption\n5. Turtle Graphic\n6. File Function\n7. Quiz\n8. History  \n9. Exit")
         Choice = input("Select a Function:")
         if Choice == "1":
             main()
@@ -380,27 +507,12 @@ def main_menu():
             File_Handle_Menu()
             function_usage["File Function"] += 1
         elif Choice == "7":
-            print("Most frequently used function:", most_frequently_used_function())
+            Quiz()
+            function_usage["Quiz"] += 1
         elif Choice == "8":
+            print("Most frequently used function:", most_frequently_used_function())
+        elif Choice == "9":
             confirmation = input("Are You Sure?\n")
             if confirmation.lower() == "yes":
                 break
-count = 0
-
-def pass_lock(password):
-    if password != "kibosucksatlife":
-        return "INCORRECT PASSWORD!!!"
-
-while count < 3:
-    pass_code = input("Enter Password: ")
-    count = count + 1
-    result = pass_lock(pass_code)
-    if result:
-        print(result)
-    else:
-        print("Correct Password Entered!")
-        main_menu()
-    if count == 1:
-        print("2 tries left!!!")
-    elif count == 2:
-        print("1 try left!!!")
+main_menu()
