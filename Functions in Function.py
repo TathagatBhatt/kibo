@@ -537,7 +537,7 @@ def main_menu():
         elif Choice == "8":
             Fact_Lab()
             function_usage["Fun Fact"] += 1
-        elif Choice == "9":s
+        elif Choice == "9":
             print("Most frequently used function:", most_frequently_used_function())
         elif Choice == "10":
             confirmation = input("Are You Sure?\n")
