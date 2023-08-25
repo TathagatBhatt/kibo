@@ -8,6 +8,30 @@ import pickle
 from collections import Counter
 import math
 import numpy as np
+def Fact_Lab():
+    L =[
+    "Fact 1 : Though less common than earthquakes, the moon actually has moonquakes, too.",
+    "Fact 2 : You actually lose a large percentage of your taste buds while on an airplane. This might explain a lot about those less-than-stellar in-flight meals, or why you find yourself craving the saltiest foods while in the sky.",
+    "Fact 3 : Although it may sound counterintuitive, your small intestine is actually the largest (internal) organ in your body.",
+    "Fact 4 : You probably know that snails are petty slow creatures, but did you know that they also take the longest naps? One nap can last up to three years!",
+    "Fact 5 : You may be jealous of a bird's ability to fly, but it may soothe your envy to learn they can't live in space because they need gravity to swallow."
+    "Fact 6 : Bees can sting other bees — usually if they feel threatened or are protecting their territory. In other words, you're not the only one who's scared of getting stung.",
+    "Fact 7 : Whether you've seen a tiger in real life or in a photo, you know that they have striped fur. But they actually have striped skin, as well.",
+    "Fact 8 : If you're a cat lover, then you may be surprised by this interesting fact: Cats can't taste anything that's sweet. That's probably why they can't get enough of their favorite salty snack.",
+    "Fact 9 : Most people know dolphins have incredible sonar abilities. But did you know they were studied as war tools during the Cold War? They really are as smart as people say they are.",
+    "Fact 10 : Not only are sea lions totally adorable, but they're also very musical. They are the only animal that can clap to a beat."
+    "Fact 11 : Like humans, koalas actually have unique individual fingerprints. If you place a koala and human finger print side by side, they're actually pretty hard to differentiate. ",
+    "Fact 12 : You may know that everyone's fingerprints are different, but did you know that the same is true of everyone's tongue print?",
+    "Fact 13 : Your brain uses 10 watts of energy to think, but it can't feel pain. You know what they say: Mind over matter.",
+    "Fact 14 : Brendan Fraser almost died while filming The Mummy (he passed out while filming a scene). Pretty scary, right?",
+    "Fact 15 : In a group of 23 people, there is a 50% chance that two will share the same birthday.",
+    "Fact 16 : Will Ferrell consumed so much sugar while filming Elf that he actually became physically ill. If you've seen the famous spaghetti scene, then you can probably understand why.",
+    "Fact 17 : It may feel a lot longer in the moment, but the average person spends two weeks of their life sitting at traffic lights.",
+    "Fact 18 : The Hollywood sign in Los Angeles once said Hollywoodland, but was changed in 1949",
+    "Fact 19 : The most expensive film ever made was Pirates of the Caribbean: On Stranger Tides, which cost 378 million dollars to create. For reference, the average budget for a big studio movie is around $65 million.",
+    "Fact 20 : If E.T. is one of your favorite movies of all time, then you'll be interested to know that someone squished their hands in jelly to make the sound effect for E.T. walking around"
+    ]
+    print(random.choice(L))
 def Questions():
     points = 0
     Ans1 = ["Neil A.","Alden Armstrong","Neil Armstrong","Neil Alden Armstrong"]
@@ -111,13 +135,13 @@ def Questions():
                                             pass
                                         Name = input("Enter Your First Name :")
                                         while points <=5:
-                                            print("Congrats",Name,"You Scored",points,"points ! Nice Try")
+                                            print("Congrats",Name,"You Scored",points,"points out of 10! Nice Try")
                                             return
                                         while points <= 8:
-                                            print("Congrats",Name,"You Scored",points,"points ! Great Job!")
+                                            print("Congrats",Name,"You Scored",points,"points out of 10! Great Job!")
                                             return
                                         while points <= 10:
-                                            print("Congrats",Name,"You Scored",points,"points ! Perfect!")
+                                            print("Congrats",Name,"You Scored",points,"points out of 10! Perfect!")
                                             return
                     
 def Quiz():               
@@ -144,7 +168,8 @@ function_usage = {
     "Encryption": 0,
     "Turtle Graphic": 0,
     "File Function": 0,
-    "Quiz" : 0
+    "Quiz" : 0,
+    "Fun Fact" : 0
 }
 def Rainbow_spiral():
     l=['red','blue','black','green','black','yellow']
@@ -486,7 +511,7 @@ def Calculate():
                 break
 def main_menu():
     while True:
-        print("***FUNCTION MENU***\n1. Password Function\n2. Stack Function\n3. Calculator\n4. Encryption\n5. Turtle Graphic\n6. File Function\n7. Quiz\n8. History  \n9. Exit")
+        print("***FUNCTION MENU***\n1. Password Function\n2. Stack Function\n3. Calculator\n4. Encryption\n5. Turtle Graphic\n6. File Function\n7. Quiz\n8. Fun Fact \n9. History  \n10. Exit")
         Choice = input("Select a Function:")
         if Choice == "1":
             main()
@@ -510,9 +535,30 @@ def main_menu():
             Quiz()
             function_usage["Quiz"] += 1
         elif Choice == "8":
+            Fact_Lab()
+            function_usage["Fun Fact"] += 1
+        elif Choice == "9":s
             print("Most frequently used function:", most_frequently_used_function())
-        elif Choice == "9":
+        elif Choice == "10":
             confirmation = input("Are You Sure?\n")
             if confirmation.lower() == "yes":
                 break
-main_menu()
+count = 0
+
+def pass_lock(password):
+    if password != "kibosucksatlife":
+        return "INCORRECT PASSWORD!!!"
+
+while count < 3:
+    pass_code = input("Enter Password: ")
+    count = count + 1
+    result = pass_lock(pass_code)
+    if result:
+        print(result)
+    else:
+        print("Correct Password Entered!")
+        main_menu()
+    if count == 1:
+        print("2 tries left!!!")
+    elif count == 2:
+        print("1 try left!!!")
