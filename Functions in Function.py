@@ -1,6 +1,7 @@
 import string
 import random
 import os
+import sympy
 import turtle
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
@@ -8,18 +9,74 @@ import pickle
 from collections import Counter
 import math
 import numpy as np
+from sympy import rad
+def Degree_To_Radian():
+    Degrees = int(input("Enter the degree of which you need the value of in radian :"))
+    angle_degrees = Degrees
+    angle_radians = rad(angle_degrees)
+    print(f"{angle_degrees} degrees is equal to {angle_radians} radians.")
+def Sin():
+    Degrees = int(input("Enter the degree of which you need the value of :"))
+    print("The value of Sin on",Degrees,"Degrees is:",math.sin(Degrees))
+def Cos():
+     Degrees = int(input("Enter the degree of which you need the value of :"))
+     print("The value of Cos on",Degrees,"Degrees is:",math.cos(Degrees))
+def Tan():
+    Degrees = int(input("Enter the degree of which you need the value of :"))
+    print("The value of Tan on",Degrees,"Degrees is:",math.tan(Degrees))
+def Cosec():
+    Degrees = int(input("Enter the degree of which you need the value of :"))
+    print("The value of Cosec on",Degrees,"Degrees is:",math.cosec(Degrees))
+def Sec():
+    Degrees = int(input("Enter the degree of which you need the value of :"))
+    print("The value of Sec on",Degrees,"Degrees is:",math.sec(Degrees))
+def Cot():
+    Degrees = int(input("Enter the degree of which you need the value of :"))
+    print("The value of Cot on",Degrees,"Degrees is:",math.cot(Degrees))
+def Function_Value():
+    while True :
+        print("***Trigonomteric Value Calculator Functions***\n1.Sin\n2.Cos\n3.Tan\n4.Cosec\n5.Sec\n6.Cot\n7.Exit")
+        Choice = input("Select The Desired Function:")
+        if Choice == "1":
+            Sin()
+        elif Choice == "2":
+            Cos()
+        elif Choice == "3":
+            Tan()
+        elif Choice == "4":
+            Cosec()
+        elif Choice == "5":
+            Sec()
+        elif Choice == "6":
+            Cot()
+        elif Choice == "7":
+            confirmation = input("Are You Sure (yes/no):")
+            if confirmation.lower()=="yes":
+                break
+def Trigonometeric_Functions():
+    while True:
+        print("***Trigonometry Function Menu*** \n1.Value Calculator\n2.Degree To Radian\n3.Exit")
+        Choice = input("Select An Option:")
+        if Choice =="1":
+          Function_Value()
+        if Choice == "2":
+            Degree_To_Radian()
+        if Choice == "3":
+            confrimation = input("Are You Sure ? (yes/no) \n")
+            if confrimation.lower() == "yes":
+                break
 def Fact_Lab():
-    L =[
+    Fact_lib =[
     "Fact 1 : Though less common than earthquakes, the moon actually has moonquakes, too.",
     "Fact 2 : You actually lose a large percentage of your taste buds while on an airplane. This might explain a lot about those less-than-stellar in-flight meals, or why you find yourself craving the saltiest foods while in the sky.",
     "Fact 3 : Although it may sound counterintuitive, your small intestine is actually the largest (internal) organ in your body.",
     "Fact 4 : You probably know that snails are petty slow creatures, but did you know that they also take the longest naps? One nap can last up to three years!",
-    "Fact 5 : You may be jealous of a bird's ability to fly, but it may soothe your envy to learn they can't live in space because they need gravity to swallow."
+    "Fact 5 : You may be jealous of a bird's ability to fly, but it may soothe your envy to learn they can't live in space because they need gravity to swallow.",
     "Fact 6 : Bees can sting other bees — usually if they feel threatened or are protecting their territory. In other words, you're not the only one who's scared of getting stung.",
     "Fact 7 : Whether you've seen a tiger in real life or in a photo, you know that they have striped fur. But they actually have striped skin, as well.",
     "Fact 8 : If you're a cat lover, then you may be surprised by this interesting fact: Cats can't taste anything that's sweet. That's probably why they can't get enough of their favorite salty snack.",
     "Fact 9 : Most people know dolphins have incredible sonar abilities. But did you know they were studied as war tools during the Cold War? They really are as smart as people say they are.",
-    "Fact 10 : Not only are sea lions totally adorable, but they're also very musical. They are the only animal that can clap to a beat."
+    "Fact 10 : Not only are sea lions totally adorable, but they're also very musical. They are the only animal that can clap to a beat.",
     "Fact 11 : Like humans, koalas actually have unique individual fingerprints. If you place a koala and human finger print side by side, they're actually pretty hard to differentiate. ",
     "Fact 12 : You may know that everyone's fingerprints are different, but did you know that the same is true of everyone's tongue print?",
     "Fact 13 : Your brain uses 10 watts of energy to think, but it can't feel pain. You know what they say: Mind over matter.",
@@ -31,7 +88,7 @@ def Fact_Lab():
     "Fact 19 : The most expensive film ever made was Pirates of the Caribbean: On Stranger Tides, which cost 378 million dollars to create. For reference, the average budget for a big studio movie is around $65 million.",
     "Fact 20 : If E.T. is one of your favorite movies of all time, then you'll be interested to know that someone squished their hands in jelly to make the sound effect for E.T. walking around"
     ]
-    print(random.choice(L))
+    print(random.choice(Fact_lib))
 def Questions():
     points = 0
     Ans1 = ["Neil A.","Alden Armstrong","Neil Armstrong","Neil Alden Armstrong"]
@@ -158,6 +215,8 @@ def Quiz():
                     break
                 if Choice.lower()== "yes":
                     Questions()
+                    break
+        break
 def most_frequently_used_function():
     most_common_function = Counter(function_usage).most_common(1)
     return most_common_function[0][0]
@@ -476,7 +535,7 @@ def Calculate():
         Result = math.factorial(X)
         print ("The Factorial of",X,"is:",Result)
     while True:
-        print("***Ca1culator Menu***\n 1.Addition\n 2.Subtract\n 3.Multiplie \n 4.Devide \n 5.Square\n 6.Percentage\n 7.Factorial \n 8.Exit")
+        print("***Ca1culator Menu***\n 1.Addition\n 2.Subtract\n 3.Multiplie \n 4.Devide \n 5.Square\n 6.Percentage\n 7.Factorial \n 8. Trigonometric Functions\n 9.Exit")
         Choice = input("Select An Option:")
         if Choice == "1":
             X = float(input("ENTER NUMBER:"))
@@ -506,6 +565,8 @@ def Calculate():
             X = int(input("ENTER THE NUMBER:"))
             Factorial()
         if Choice == "8":
+            Trigonometeric_Functions()
+        if Choice == "9":
             confirmation = input("Are you sure \n")
             if confirmation.lower() == "yes" :
                 break
@@ -543,4 +604,3 @@ def main_menu():
             confirmation = input("Are You Sure?\n")
             if confirmation.lower() == "yes":
                 break
-main_menu()
