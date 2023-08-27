@@ -679,10 +679,4 @@ def main_menu():
             confirmation = input("Are You Sure?\n")
             if confirmation.lower() == "yes":
                 break
-count = 0
-
-def pass_lock(password):
-    if password != "kibosucksatlife":
-        return "INCORRECT PASSWORD!!!"
-
 main_menu()
