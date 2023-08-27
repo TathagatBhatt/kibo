@@ -685,16 +685,4 @@ def pass_lock(password):
     if password != "kibosucksatlife":
         return "INCORRECT PASSWORD!!!"
 
-while count < 3:
-    pass_code = input("Enter Password: ")
-    count = count + 1
-    result = pass_lock(pass_code)
-    if result:
-        print(result)
-    else:
-        print("Correct Password Entered!")
-        main_menu()
-    if count == 1:
-        print("2 tries left!!!")
-    elif count == 2:
-        print("1 try left!!!")
+main_menu()
