@@ -69,7 +69,7 @@ def Translate_Japanese():
             break
 def Translation_Menu():
     while True:
-        print("***TRANSLATOR***\n1.Japanese\n2.Korean\n3.Hindi")
+        print("***TRANSLATOR***\n1.Japanese\n2.Korean\n3.Hindi\n4.Exit")
         Choice = int(input("Select An Option:"))
         if Choice == 1:
             Translate_Japanese()
