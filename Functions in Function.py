@@ -10,6 +10,77 @@ from collections import Counter
 import math
 import numpy as np
 from sympy import rad
+import googletrans
+from googletrans import Translator
+translator = Translator()
+def english_to_japanese():
+    english_text = input("Enter the text:")
+    janpanese_translation = translator.translate(english_text, src='en',dest='ja')
+    print(english_text,"in japanese means:",janpanese_translation.text)
+def japanese_to_english():
+    japanese_text = input("Enter the text:")
+    english_translation = translator.translate(japanese_text, src='ja',dest='en')
+    print(japanese_text,"in english means:",english_translation.text)
+def english_to_korean():
+    english_text = input("Enter the text:")
+    korean_translation = translator.translate(english_text, src='en',dest='ko')
+    print(english_text,"in korean means:",korean_translation.text)
+def korean_to_english():
+    korean_text = input("Enter the text:")
+    english_translation = translator.translate(korean_text, src='ko',dest='en')
+    print( korean_text,"in english means:",english_translation.text)
+def english_to_hindi():
+    english_text = input("Enter the text:")
+    hindi_translation = translator.translate(english_text, src='en',dest='hi')
+    print(english_text,"in hindi means:",hindi_translation.text)
+def hindi_to_english():
+    hindi_text = input("Enter the text:")
+    english_translation = translator.translate(hindi_text, src='hi',dest='en')
+    print(hindi_text,"in english means:",english_translation.text)
+def Translate_Hindi():
+    while True:
+        print("***Hindi Translator*** \n1.Hindi To English \n2.English To Hindi \n3.Exit")
+        Choice = int(input("Select An Option :"))
+        if Choice == 1:
+             hindi_to_english()
+        if Choice == 2:
+            english_to_hindi()
+        if Choice == 3:
+            break
+def Translate_Korean():
+    while True:
+        print("***Korean Translator*** \n1.Korean To English \n2.English To Korean \n3.Exit")
+        Choice = int(input("Select An Option :"))
+        if Choice == 1:
+             korean_to_english()
+        if Choice == 2:
+            english_to_korean()
+        if Choice == 3:
+            break
+def Translate_Japanese():
+    while True:
+        print("***Japanese Translator*** \n1.Japanese To English \n2.English To Japanese \n3.Exit")
+        Choice = int(input("Select An Option :"))
+        if Choice == 1:
+             japanese_to_english()
+        if Choice == 2:
+            english_to_japanese()
+        if Choice == 3:
+            break
+def Translation_Menu():
+    while True:
+        print("***TRANSLATOR***\n1.Japanese\n2.Korean\n3.Hindi")
+        Choice = int(input("Select An Option:"))
+        if Choice == 1:
+            Translate_Japanese()
+        if Choice == 2:
+            Translate_Korean()
+        if Choice == 3:
+            Translate_Hindi()
+        if Choice == 4:
+            confirmation = input("Are You Sure ? (yes/no):")
+            if confirmation.lower() == "yes":
+                break
 def Degree_To_Radian():
     Degrees = int(input("Enter the degree of which you need the value of in radian :"))
     angle_degrees = Degrees
@@ -228,7 +299,8 @@ function_usage = {
     "Turtle Graphic": 0,
     "File Function": 0,
     "Quiz" : 0,
-    "Fun Fact" : 0
+    "Fun Fact" : 0,
+    "Translator" : 0
 }
 def Rainbow_spiral():
     l=['red','blue','black','green','black','yellow']
@@ -572,7 +644,7 @@ def Calculate():
                 break
 def main_menu():
     while True:
-        print("***FUNCTION MENU***\n1. Password Function\n2. Stack Function\n3. Calculator\n4. Encryption\n5. Turtle Graphic\n6. File Function\n7. Quiz\n8. Fun Fact \n9. History  \n10. Exit")
+        print("***FUNCTION MENU***\n1. Password Function\n2. Stack Function\n3. Calculator\n4. Encryption\n5. Turtle Graphic\n6. File Function\n7. Quiz\n8. Fun Fact \n9. History  \n10. Translator \n11. Exit")
         Choice = input("Select a Function:")
         if Choice == "1":
             main()
@@ -601,6 +673,28 @@ def main_menu():
         elif Choice == "9":
             print("Most frequently used function:", most_frequently_used_function())
         elif Choice == "10":
+            Translation_Menu()
+            function_usage["Translator"] += 1
+        elif Choice == "11":
             confirmation = input("Are You Sure?\n")
             if confirmation.lower() == "yes":
                 break
+count = 0
+
+def pass_lock(password):
+    if password != "kibosucksatlife":
+        return "INCORRECT PASSWORD!!!"
+
+while count < 3:
+    pass_code = input("Enter Password: ")
+    count = count + 1
+    result = pass_lock(pass_code)
+    if result:
+        print(result)
+    else:
+        print("Correct Password Entered!")
+        main_menu()
+    if count == 1:
+        print("2 tries left!!!")
+    elif count == 2:
+        print("1 try left!!!")
