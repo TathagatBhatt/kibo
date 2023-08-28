@@ -12,7 +12,44 @@ import numpy as np
 from sympy import rad
 import googletrans
 from googletrans import Translator
+import sympy as sp
 translator = Translator()
+import sympy as sp
+
+def definite_integration():
+    var = input("Enter the variable of integration: ")
+    function_str = input("Enter the function to integrate: ")
+    lower_limit = float(input("Enter the lower limit of integration: "))
+    upper_limit = float(input("Enter the upper limit of integration: "))
+
+    x = sp.symbols(var)
+    function = sp.sympify(function_str)
+
+    integral = sp.integrate(function, (x, lower_limit, upper_limit))
+
+    print(f"The definite integral of {function} from {lower_limit} to {upper_limit} with respect to {var} is: {integral}")
+
+
+
+def integrate_function():
+    var = input("Enter the variable to integrate with respect to: ")
+    function_str = input("Enter the desired function: ")
+    
+    x = sp.symbols(var)
+    function = sp.sympify(function_str)
+    
+    integral = sp.integrate(function, x)
+    
+    print("The integral of", function, "with respect to", var, "is:", integral)
+def differentiate_function():
+    var = input("Enter the variable to differentiate with respect to: ")
+    function_str = input("Enter the desired function: ")
+    
+    x = sp.symbols(var)
+    function = sp.sympify(function_str)
+    
+    derivative = sp.diff(function, x)  
+    print("The derivative of", function, "with respect to", var, "is:", derivative)
 def english_to_japanese():
     english_text = input("Enter the text:")
     janpanese_translation = translator.translate(english_text, src='en',dest='ja')
@@ -607,7 +644,7 @@ def Calculate():
         Result = math.factorial(X)
         print ("The Factorial of",X,"is:",Result)
     while True:
-        print("***Ca1culator Menu***\n 1.Addition\n 2.Subtract\n 3.Multiplie \n 4.Devide \n 5.Square\n 6.Percentage\n 7.Factorial \n 8. Trigonometric Functions\n 9.Exit")
+        print("***Ca1culator Menu***\n 1.Addition\n 2.Subtract\n 3.Multiplie \n 4.Devide \n 5.Square\n 6.Percentage\n 7.Factorial \n 8. Trigonometric Functions\n9.Integrate\n10.Definite Integration\n11.Differentiate\n 12.Exit")
         Choice = input("Select An Option:")
         if Choice == "1":
             X = float(input("ENTER NUMBER:"))
@@ -639,6 +676,12 @@ def Calculate():
         if Choice == "8":
             Trigonometeric_Functions()
         if Choice == "9":
+            integrate_function()
+        if Choice == "10":
+            definite_integration()
+        if Choice == "11":
+            differentiate_function()
+        if Choice == "12":
             confirmation = input("Are you sure \n")
             if confirmation.lower() == "yes" :
                 break
