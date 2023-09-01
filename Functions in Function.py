@@ -480,12 +480,6 @@ def Turtle_Menu():
             confermation = input("Are You Sure ? \n")
             if confermation.lower() == "yes":
                 break
-def DECRYPTION():
-    encrypted_data = input("Enter the encrypted data: ")
-    key = input("Enter the key: ")
-    cipher = AES.new(key, AES.MODE_CBC)
-    decrypted_data = unpad(cipher.decrypt(encrypted_data), AES.block_size)
-    return decrypted_data
 def ENCRYPTION():
     message = input("Enter the message to encrypt: ")
     key = input("Enter the key: ")
@@ -504,21 +498,6 @@ def DECRYPT():
         decrypted_message += chr(ord(char) - ord(key[key_index]))
         key_index = (key_index + 1) % len(key)
     return decrypted_message
-def ENCRYPT():
-    try:
-        user_input = input("Enter the text to encrypt: ")
-        key = os.urandom(32)
-        encrypted_data = aes_encrypt(user_input, key)
-        print("Key:", key)
-        print("Encrypted data:", encrypted_data)
-        return encrypted_data, key
-    except ValueError:
-        print("Invalid input. Please make sure the key is 16, 24, or 32 bytes long.")
-def aes_encrypt(data, key):
-    cipher = AES.new(key, AES.MODE_CBC)
-    ct_bytes = cipher.encrypt(pad(data.encode(), AES.block_size))
-    iv = cipher.iv
-    return (iv + ct_bytes)
 
 def caesar_cipher_encrypt(text, shift):
     encrypted_text = ""
@@ -607,17 +586,13 @@ def main():
                 break
 def Encryptor():
     while True:
-        print("***ENCRYPTION MENU*** \n 1.AES Encryptor Function \n 2.Simple Encryptor \n 3.AES Decryptor \n 4.Simple Decryptor \n 5.Exit")
+        print("***ENCRYPTION MENU*** \n 1.Simple Encryptor \n 2.Simple Decryptor \n 3.Exit")
         Choice  = input("Select An Option:")
         if Choice == "1":
-            print(ENCRYPT())
-        if Choice == "2":
             print(ENCRYPTION())
-        if Choice == "3":
-            print(DECRYPTION())
-        if Choice == "4":
+        if Choice == "2":
             print(DECRYPT())
-        if Choice == "5":
+        if Choice == "3":
             Confrimation = input("Are You Sure ? \n")
             if Confrimation.lower() == "yes":
                 break
@@ -722,4 +697,3 @@ def main_menu():
             confirmation = input("Are You Sure?\n")
             if confirmation.lower() == "yes":
                 break
-main_menu()
