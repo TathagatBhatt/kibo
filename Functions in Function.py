@@ -697,3 +697,4 @@ def main_menu():
             confirmation = input("Are You Sure?\n")
             if confirmation.lower() == "yes":
                 break
+main_menu()
