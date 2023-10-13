@@ -1,3 +1,4 @@
+#modules imports
 import string
 import random
 import os
@@ -8,48 +9,176 @@ from Crypto.Util.Padding import pad, unpad
 import pickle
 from collections import Counter
 import math
-import numpy as np
 from sympy import rad
 import googletrans
 from googletrans import Translator
 import sympy as sp
 translator = Translator()
 import sympy as sp
-
+import mysql.connector
+def sql():
+    password = input("enter the password:")
+    mydb = mysql.connector.connect(host="localhost",user="root",password=password)
+    cursor = mydb.cursor()
+    while True:
+        command = input("input sql command (or exit to exit this function):")
+        if command.lower() == "exit":
+            break
+        cursor.execute(command)
+        for X in  cursor :
+            print(X)  
+def SQL_MENU():
+    while True:
+        print("***SQL MENU*** \n1.SQL COMMAND LINE \n2.EXIT")
+        choice = input("select an option :")
+        if choice == "1":
+            sql()
+        if choice == "2":
+            confrimation=input("are you sure ?(yes/no)\n")
+            if confrimation == "yes":
+                break
 def definite_integration():
     var = input("Enter the variable of integration: ")
     function_str = input("Enter the function to integrate: ")
     lower_limit = float(input("Enter the lower limit of integration: "))
     upper_limit = float(input("Enter the upper limit of integration: "))
-
     x = sp.symbols(var)
     function = sp.sympify(function_str)
-
     integral = sp.integrate(function, (x, lower_limit, upper_limit))
-
     print(f"The definite integral of {function} from {lower_limit} to {upper_limit} with respect to {var} is: {integral}")
-
-
-
 def integrate_function():
     var = input("Enter the variable to integrate with respect to: ")
     function_str = input("Enter the desired function: ")
-    
     x = sp.symbols(var)
     function = sp.sympify(function_str)
-    
     integral = sp.integrate(function, x)
-    
-    print("The integral of", function, "with respect to", var, "is:", integral)
+    print("The integral of", function, "with respect to", var, "is:", integral,"+ C")
 def differentiate_function():
     var = input("Enter the variable to differentiate with respect to: ")
     function_str = input("Enter the desired function: ")
-    
     x = sp.symbols(var)
     function = sp.sympify(function_str)
-    
     derivative = sp.diff(function, x)  
     print("The derivative of", function, "with respect to", var, "is:", derivative)
+def Degree_To_Radian():
+    Degrees = int(input("Enter the degree of which you need the value of in radian :"))
+    angle_degrees = Degrees
+    angle_radians = rad(angle_degrees)
+    print(f"{angle_degrees} degrees is equal to {angle_radians} radians.")
+def Sin():
+    Degrees = int(input("Enter the degree of which you need the value of :"))
+    print("The value of Sin on",Degrees,"Degrees is:",math.sin(Degrees))
+def Cos():
+     Degrees = int(input("Enter the degree of which you need the value of :"))
+     print("The value of Cos on",Degrees,"Degrees is:",math.cos(Degrees))
+def Tan():
+    Degrees = int(input("Enter the degree of which you need the value of :"))
+    print("The value of Tan on",Degrees,"Degrees is:",math.tan(Degrees))
+def Cosec():
+    Degrees = int(input("Enter the degree of which you need the value of :"))
+    print("The value of Cosec on",Degrees,"Degrees is:",math.cosec(Degrees))
+def Sec():
+    Degrees = int(input("Enter the degree of which you need the value of :"))
+    print("The value of Sec on",Degrees,"Degrees is:",math.sec(Degrees))
+def Cot():
+    Degrees = int(input("Enter the degree of which you need the value of :"))
+    print("The value of Cot on",Degrees,"Degrees is:",math.cot(Degrees))
+def Function_Value():
+    while True :
+        print("***Trigonomteric Value Calculator Functions***\n1.Sin\n2.Cos\n3.Tan\n4.Cosec\n5.Sec\n6.Cot\n7.Exit")
+        Choice = input("Select The Desired Function:")
+        if Choice == "1":
+            Sin()
+        elif Choice == "2":
+            Cos()
+        elif Choice == "3":
+            Tan()
+        elif Choice == "4":
+            Cosec()
+        elif Choice == "5":
+            Sec()
+        elif Choice == "6":
+            Cot()
+        elif Choice == "7":
+            confirmation = input("Are You Sure (yes/no):")
+            if confirmation.lower()=="yes":
+                break
+def Trigonometeric_Functions():
+    while True:
+        print("***Trigonometry Function Menu*** \n1.Value Calculator\n2.Degree To Radian\n3.Exit")
+        Choice = input("Select An Option:")
+        if Choice =="1":
+          Function_Value()
+        if Choice == "2":
+            Degree_To_Radian()
+        if Choice == "3":
+            confrimation = input("Are You Sure ? (yes/no) \n")
+            if confrimation.lower() == "yes":
+                break
+def Calculate():
+    def addition():
+        Result = X+Y
+        print (Y,"added to",X,"gives:",Result)
+    def subtract():
+        Result = X-Y
+        print (Y,"Subtracted from",X, "is:",Result)
+    def multiplie():
+        Result = X*Y
+        print (X,"multiplied by",Y,"is:",Result)
+    def devide():
+        Result = X/Y
+        print (X,"devide by",Y,"is:",Result)
+    def square():
+        Result = X**Y
+        print (X,"raised to the power",Y,"is:",Result)
+    def percentage():
+        Result = X/Y * 100
+        print ("The Percentage is:", Result , "%")
+    def Factorial():
+        Result = math.factorial(X)
+        print ("The Factorial of",X,"is:",Result)
+    while True:
+        print("***Ca1culator Menu***\n 1.Addition\n 2.Subtract\n 3.Multiplie \n 4.Devide \n 5.Square\n 6.Percentage\n 7.Factorial \n 8. Trigonometric Functions\n9.Integrate\n10.Definite Integration\n11.Differentiate\n 12.Exit")
+        Choice = input("Select An Option:")
+        if Choice == "1":
+            X = float(input("ENTER NUMBER:"))
+            Y = float(input("ENTER THE NUMBER TO BE ADDED INTO:"))
+            addition()
+        if Choice == "2":
+            X = float(input("ENTER NUMBER TO BE SUBTRACTED FROM:"))
+            Y = float(input("ENTER NUMBER TO BE SUBTRACTED:"))
+            subtract()
+        if Choice == "3":
+            X = float(input("ENTER THE NUMBER:"))
+            Y = float(input("ENTER THE NUMBER TO BE MULTIPLIED WITH:"))
+            multiplie()
+        if Choice == "4":
+            X = float(input("ENTER DIVIDEND:"))
+            Y = float(input("ENTER THE DIVISOR:"))
+            devide()
+        if Choice == "5":
+            X = float(input("ENTER THE NUMBER:"))
+            Y = float(input("ENTER IT'S POWER:"))
+            square()
+        if Choice == "6":
+            X = float(input("ENTER PORTION AMOUNT:"))
+            Y = float(input("ENTER THE TOTAL AMOUNT:"))
+            percentage()
+        if Choice == "7":
+            X = int(input("ENTER THE NUMBER:"))
+            Factorial()
+        if Choice == "8":
+            Trigonometeric_Functions()
+        if Choice == "9":
+            integrate_function()
+        if Choice == "10":
+            definite_integration()
+        if Choice == "11":
+            differentiate_function()
+        if Choice == "12":
+            confirmation = input("Are you sure \n")
+            if confirmation.lower() == "yes" :
+                break
 def english_to_japanese():
     english_text = input("Enter the text:")
     janpanese_translation = translator.translate(english_text, src='en',dest='ja')
@@ -117,61 +246,6 @@ def Translation_Menu():
         if Choice == 4:
             confirmation = input("Are You Sure ? (yes/no):")
             if confirmation.lower() == "yes":
-                break
-def Degree_To_Radian():
-    Degrees = int(input("Enter the degree of which you need the value of in radian :"))
-    angle_degrees = Degrees
-    angle_radians = rad(angle_degrees)
-    print(f"{angle_degrees} degrees is equal to {angle_radians} radians.")
-def Sin():
-    Degrees = int(input("Enter the degree of which you need the value of :"))
-    print("The value of Sin on",Degrees,"Degrees is:",math.sin(Degrees))
-def Cos():
-     Degrees = int(input("Enter the degree of which you need the value of :"))
-     print("The value of Cos on",Degrees,"Degrees is:",math.cos(Degrees))
-def Tan():
-    Degrees = int(input("Enter the degree of which you need the value of :"))
-    print("The value of Tan on",Degrees,"Degrees is:",math.tan(Degrees))
-def Cosec():
-    Degrees = int(input("Enter the degree of which you need the value of :"))
-    print("The value of Cosec on",Degrees,"Degrees is:",math.cosec(Degrees))
-def Sec():
-    Degrees = int(input("Enter the degree of which you need the value of :"))
-    print("The value of Sec on",Degrees,"Degrees is:",math.sec(Degrees))
-def Cot():
-    Degrees = int(input("Enter the degree of which you need the value of :"))
-    print("The value of Cot on",Degrees,"Degrees is:",math.cot(Degrees))
-def Function_Value():
-    while True :
-        print("***Trigonomteric Value Calculator Functions***\n1.Sin\n2.Cos\n3.Tan\n4.Cosec\n5.Sec\n6.Cot\n7.Exit")
-        Choice = input("Select The Desired Function:")
-        if Choice == "1":
-            Sin()
-        elif Choice == "2":
-            Cos()
-        elif Choice == "3":
-            Tan()
-        elif Choice == "4":
-            Cosec()
-        elif Choice == "5":
-            Sec()
-        elif Choice == "6":
-            Cot()
-        elif Choice == "7":
-            confirmation = input("Are You Sure (yes/no):")
-            if confirmation.lower()=="yes":
-                break
-def Trigonometeric_Functions():
-    while True:
-        print("***Trigonometry Function Menu*** \n1.Value Calculator\n2.Degree To Radian\n3.Exit")
-        Choice = input("Select An Option:")
-        if Choice =="1":
-          Function_Value()
-        if Choice == "2":
-            Degree_To_Radian()
-        if Choice == "3":
-            confrimation = input("Are You Sure ? (yes/no) \n")
-            if confrimation.lower() == "yes":
                 break
 def Fact_Lab():
     Fact_lib =[
@@ -337,20 +411,9 @@ function_usage = {
     "File Function": 0,
     "Quiz" : 0,
     "Fun Fact" : 0,
-    "Translator" : 0
+    "Translator" : 0,
+    "SQL" : 0
 }
-def Rainbow_spiral():
-    l=['red','blue','black','green','black','yellow']
-    turtle.speed(1000)
-    for i in range(1,400):
-        turtle.circle(i/5)
-        turtle.right(13)
-        if i %10==1:
-            turtle.color(random.choice(l))
-    for i in range(200):
-      for j in range(500):
-          pass
-      turtle.bye()
 def read_txt():
     File_Name = input("Enter File Name : ")
     File = open(File_Name+".txt","r")
@@ -428,7 +491,19 @@ def append_binary():
     my_data = MyClass(Content)
     with open(File_Name+"."+Extension, "ab") as f:
         pickle.dump(my_data, f)
-
+#Turtle graphic code
+def Rainbow_spiral():
+    l=['red','blue','black','green','black','yellow']
+    turtle.speed(1000)
+    for i in range(1,400):
+        turtle.circle(i/5)
+        turtle.right(13)
+        if i %10==1:
+            turtle.color(random.choice(l))
+    for i in range(200):
+      for j in range(500):
+          pass
+      turtle.bye()
 def Turtle_Menu():
     def Square():
         for i in range(4):
@@ -480,6 +555,12 @@ def Turtle_Menu():
             confermation = input("Are You Sure ? \n")
             if confermation.lower() == "yes":
                 break
+def DECRYPTION():
+    encrypted_data = input("Enter the encrypted data: ")
+    key = input("Enter the key: ")
+    cipher = AES.new(key, AES.MODE_CBC)
+    decrypted_data = unpad(cipher.decrypt(encrypted_data), AES.block_size)
+    return decrypted_data
 def ENCRYPTION():
     message = input("Enter the message to encrypt: ")
     key = input("Enter the key: ")
@@ -498,6 +579,21 @@ def DECRYPT():
         decrypted_message += chr(ord(char) - ord(key[key_index]))
         key_index = (key_index + 1) % len(key)
     return decrypted_message
+def ENCRYPT():
+    try:
+        user_input = input("Enter the text to encrypt: ")
+        key = os.urandom(32)
+        encrypted_data = aes_encrypt(user_input, key)
+        print("Key:", key)
+        print("Encrypted data:", encrypted_data)
+        return encrypted_data, key
+    except ValueError:
+        print("Invalid input. Please make sure the key is 16, 24, or 32 bytes long.")
+def aes_encrypt(data, key):
+    cipher = AES.new(key, AES.MODE_CBC)
+    ct_bytes = cipher.encrypt(pad(data.encode(), AES.block_size))
+    iv = cipher.iv
+    return (iv + ct_bytes)
 
 def caesar_cipher_encrypt(text, shift):
     encrypted_text = ""
@@ -510,6 +606,22 @@ def caesar_cipher_encrypt(text, shift):
         else:
             encrypted_text += char
     return encrypted_text
+def Encryptor():
+    while True:
+        print("***ENCRYPTION MENU*** \n 1.AES Encryptor Function \n 2.Simple Encryptor \n 3.AES Decryptor \n 4.Simple Decryptor \n 5.Exit")
+        Choice  = input("Select An Option:")
+        if Choice == "1":
+            print(ENCRYPT())
+        if Choice == "2":
+            print(ENCRYPTION())
+        if Choice == "3":
+            print(DECRYPTION())
+        if Choice == "4":
+            print(DECRYPT())
+        if Choice == "5":
+            Confrimation = input("Are You Sure ? \n")
+            if Confrimation.lower() == "yes":
+                break
 def Stack():
     stack = []
     def push(item):
@@ -584,85 +696,9 @@ def main():
             confirmation = input("Are you sure?\n")
             if confirmation.lower() == "yes":
                 break
-def Encryptor():
-    while True:
-        print("***ENCRYPTION MENU*** \n 1.Simple Encryptor \n 2.Simple Decryptor \n 3.Exit")
-        Choice  = input("Select An Option:")
-        if Choice == "1":
-            print(ENCRYPTION())
-        if Choice == "2":
-            print(DECRYPT())
-        if Choice == "3":
-            Confrimation = input("Are You Sure ? \n")
-            if Confrimation.lower() == "yes":
-                break
-def Calculate():
-    def addition():
-        Result = X+Y
-        print (Y,"added to",X,"gives:",Result)
-    def subtract():
-        Result = X-Y
-        print (Y,"Subtracted from",X, "is:",Result)
-    def multiplie():
-        Result = X*Y
-        print (X,"multiplied by",Y,"is:",Result)
-    def devide():
-        Result = X/Y
-        print (X,"devide by",Y,"is:",Result)
-    def square():
-        Result = X**Y
-        print (X,"raised to the power",Y,"is:",Result)
-    def percentage():
-        Result = X/Y * 100
-        print ("The Percentage is:",Result)
-    def Factorial():
-        Result = math.factorial(X)
-        print ("The Factorial of",X,"is:",Result)
-    while True:
-        print("***Ca1culator Menu***\n 1.Addition\n 2.Subtract\n 3.Multiplie \n 4.Devide \n 5.Square\n 6.Percentage\n 7.Factorial \n 8. Trigonometric Functions\n9.Integrate\n10.Definite Integration\n11.Differentiate\n 12.Exit")
-        Choice = input("Select An Option:")
-        if Choice == "1":
-            X = float(input("ENTER NUMBER:"))
-            Y = float(input("ENTER THE NUMBER TO BE ADDED INTO:"))
-            addition()
-        if Choice == "2":
-            X = float(input("ENTER NUMBER TO BE SUBTRACTED FROM:"))
-            Y = float(input("ENTER NUMBER TO BE SUBTRACTED:"))
-            subtract()
-        if Choice == "3":
-            X = float(input("ENTER THE NUMBER:"))
-            Y = float(input("ENTER THE NUMBER TO BE MULTIPLIED WITH:"))
-            multiplie()
-        if Choice == "4":
-            X = float(input("ENTER DIVIDEND:"))
-            Y = float(input("ENTER THE DIVISOR:"))
-            devide()
-        if Choice == "5":
-            X = float(input("ENTER THE NUMBER:"))
-            Y = float(input("ENTER IT'S POWER:"))
-            square()
-        if Choice == "6":
-            X = float(input("ENTER PORTION AMOUNT:"))
-            Y = float(input("ENTER THE TOTAL AMOUNT:"))
-            percentage()
-        if Choice == "7":
-            X = int(input("ENTER THE NUMBER:"))
-            Factorial()
-        if Choice == "8":
-            Trigonometeric_Functions()
-        if Choice == "9":
-            integrate_function()
-        if Choice == "10":
-            definite_integration()
-        if Choice == "11":
-            differentiate_function()
-        if Choice == "12":
-            confirmation = input("Are you sure \n")
-            if confirmation.lower() == "yes" :
-                break
 def main_menu():
     while True:
-        print("***FUNCTION MENU***\n1. Password Function\n2. Stack Function\n3. Calculator\n4. Encryption\n5. Turtle Graphic\n6. File Function\n7. Quiz\n8. Fun Fact \n9. History  \n10. Translator \n11. Exit")
+        print("***FUNCTION MENU***\n1. Password Function\n2. Stack Function\n3. Calculator\n4. Encryption\n5. Turtle Graphic\n6. File Function\n7. Quiz\n8. Fun Fact \n9. History  \n10. Translator \n11.SQL \n12. Exit")
         Choice = input("Select a Function:")
         if Choice == "1":
             main()
@@ -694,6 +730,9 @@ def main_menu():
             Translation_Menu()
             function_usage["Translator"] += 1
         elif Choice == "11":
+            SQL_MENU()
+            function_usage["SQL"] += 1
+        elif Choice == "12":
             confirmation = input("Are You Sure?\n")
             if confirmation.lower() == "yes":
                 break
