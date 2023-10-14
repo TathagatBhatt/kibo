@@ -311,7 +311,7 @@ def Questions():
                     print("INCORRECT ANSWER!!!!")
                     pass
                 while True:
-                    print("What is the of the natural satellite ? \n")
+                    print("What is the name of earth's the natural satellite ? \n")
                     Answer = input("")
                     if Answer in Ans4:
                         print("CORRECT ANWSER!!!!")
