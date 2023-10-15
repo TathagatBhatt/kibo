@@ -15,6 +15,33 @@ import sympy as sp
 translator = Translator()
 import sympy as sp
 import mysql.connector
+import pymysql
+import matplotlib.pyplot as plt
+def Graph_SQL():
+    password = input("Please enter your MySQL password:")
+    database = input("Enter the name of the database in question:")
+    field1 = input("Enter the field name:")
+    field2 = input("Enter the other field name:")
+    table = input("Enter the table name:")
+    query = "SELECT " + field1 + "," + field2 + " FROM " + table + ";"
+    connection = pymysql.connect(host="localhost", user="root", password=password, database=database)
+    cursor = connection.cursor()
+    cursor.execute(query)
+    results = cursor.fetchall()
+    field1_data = []
+    field2_data = []
+    for row in results:
+        field1_data.append(row[0])
+        field2_data.append(row[1])
+    plt.figure(figsize=(10, 6))
+    plt.bar(field1_data, field2_data, color='purple')
+    plt.xlabel('Months')
+    plt.ylabel('Revenue')
+    plt.title('Monthly Revenue')
+    plt.xticks(rotation=45)
+    plt.show()
+    cursor.close()
+    connection.close()
 def sql():
     password = input("enter the password:")
     mydb = mysql.connector.connect(host="localhost",user="root",password=password)
@@ -36,11 +63,13 @@ def sql():
     mydb.close()
 def SQL_MENU():
     while True:
-        print("***SQL MENU*** \n1.SQL COMMAND LINE \n2.EXIT")
+        print("***SQL MENU*** \n1.SQL COMMAND LINE \n2.Graph \n3.EXIT")
         choice = input("select an option :")
         if choice == "1":
             sql()
         if choice == "2":
+            Graph_SQL()
+        if choice == "3":
             confrimation=input("are you sure ?(yes/no)\n")
             if confrimation == "yes":
                 break
