@@ -1,4 +1,3 @@
-#modules imports
 import string
 import random
 import os
@@ -25,8 +24,16 @@ def sql():
         if command.lower() == "exit":
             break
         cursor.execute(command)
-        for X in  cursor :
-            print(X)  
+        if command.strip().lower().startswith("select"):
+            result = cursor.fetchall()
+            if result:
+                for data in result:
+                    print(data)
+        for X in cursor :
+            print(X)
+        mydb.commit()
+    cursor.close()
+    mydb.close()
 def SQL_MENU():
     while True:
         print("***SQL MENU*** \n1.SQL COMMAND LINE \n2.EXIT")
