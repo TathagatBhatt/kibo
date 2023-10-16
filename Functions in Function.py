@@ -23,6 +23,7 @@ def Graph_SQL():
     field1 = input("Enter the field name:")
     field2 = input("Enter the other field name:")
     table = input("Enter the table name:")
+    name = input("Enter name for graph")
     query = "SELECT " + field1 + "," + field2 + " FROM " + table + ";"
     connection = pymysql.connect(host="localhost", user="root", password=password, database=database)
     cursor = connection.cursor()
@@ -35,8 +36,8 @@ def Graph_SQL():
         field2_data.append(row[1])
     plt.figure(figsize=(10, 6))
     plt.bar(field1_data, field2_data, color='purple')
-    plt.xlabel('Months')
-    plt.ylabel('Revenue')
+    plt.xlabel(field1_data)
+    plt.ylabel(field2_data)
     plt.title('Monthly Revenue')
     plt.xticks(rotation=45)
     plt.show()
@@ -734,7 +735,7 @@ def main():
                 break
 def main_menu():
     while True:
-        print("***FUNCTION MENU***\n1. Password Function\n2. Stack Function\n3. Calculator\n4. Encryption\n5. Turtle Graphic\n6. File Function\n7. Quiz\n8. Fun Fact \n9. History  \n10. Translator \n11.SQL \n12. Exit")
+        print("***FUNCTION MENU***\n1. Password Function\n2. Stack Function\n3. Calculator\n4. Encryption\n5. Turtle Graphic\n6. File Function\n7. Quiz\n8. Fun Fact \n9. History  \n10.Translator \n11.SQL \n12.Exit")
         Choice = input("Select a Function:")
         if Choice == "1":
             main()
