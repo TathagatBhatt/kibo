@@ -8,3 +8,7 @@ pip install smypy
 pip install numpy
 
 pip install googletrans==4.0.0-rc1
+
+pip install pymysql
+
+pip install mysql-connector-python
