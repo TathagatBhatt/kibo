@@ -17,6 +17,8 @@ import sympy as sp
 import mysql.connector
 import pymysql
 import matplotlib.pyplot as plt
+import tkinter as tf
+from tkinter import messagebox
 def Graph_SQL():
     password = input("Please enter your MySQL password:")
     database = input("Enter the name of the database in question:")
@@ -38,7 +40,7 @@ def Graph_SQL():
     plt.bar(field1_data, field2_data, color='purple')
     plt.xlabel(field1_data)
     plt.ylabel(field2_data)
-    plt.title('Monthly Revenue')
+    plt.title(name)
     plt.xticks(rotation=45)
     plt.show()
     cursor.close()
@@ -528,7 +530,6 @@ def append_binary():
     my_data = MyClass(Content)
     with open(File_Name+"."+Extension, "ab") as f:
         pickle.dump(my_data, f)
-#Turtle graphic code
 def Rainbow_spiral():
     l=['red','blue','black','green','black','yellow']
     turtle.speed(1000)
@@ -541,6 +542,62 @@ def Rainbow_spiral():
       for j in range(500):
           pass
       turtle.bye()
+def race_simulation():
+    g = turtle.Turtle()
+    g.speed(10)
+    screen = g.screen
+    screen.setup(height=1.0, width=1.0)
+    screen.bgcolor("green")
+
+    def Track():
+        text = "---" * 53
+        g.penup()
+        g.goto(-315, 200)
+        g.pendown()
+        g.fd(635)
+        g.penup()
+        g.goto(-315, 110)
+        g.pendown()
+        g.fd(635)
+        g.penup()
+        g.goto(-315, 150)
+        g.pendown()
+        g.write(text)
+        g.hideturtle()
+
+    Track()
+    A = turtle.Turtle()
+    B = turtle.Turtle()
+    A.shape("circle")
+    B.shape("square")
+
+    def Positions():
+        A.speed(10)
+        B.speed(10)
+        A.penup()
+        A.goto(-315, 180)
+        A.pendown()
+        B.penup()
+        B.goto(-315, 130)
+        B.pendown()
+
+    Positions()
+
+    def race():
+        while True:
+            A_steps = random.randint(1, 10)
+            B_steps = random.randint(1, 10)
+            A.forward(A_steps)
+            A.clear()
+            B.forward(B_steps)
+            B.clear()
+            if A.xcor() >= 300:
+                messagebox.showinfo("RESULTS", "Player A Wins !!!")
+                break
+            if B.xcor() >= 300:
+                messagebox.showinfo("RESULTS", "Player B Wins !!!")
+                break
+    race()
 def Turtle_Menu():
     def Square():
         for i in range(4):
@@ -578,7 +635,7 @@ def Turtle_Menu():
         pen.hideturtle()
         turtle.done()
     while True:
-        print("***Turtle Menu*** \n1.ChessBoard \n2.Circle \n3.Square \n4.RainBow Spiral\n5.Exit")
+        print("***Turtle Menu*** \n1.ChessBoard \n2.Circle \n3.Square \n4.RainBow Spiral\n5.Race\n6.Exit")
         Choice = input("Select An Option:")
         if Choice == "1":
             ChessBoard()
@@ -589,6 +646,8 @@ def Turtle_Menu():
         if Choice == "4":
             Rainbow_spiral()
         if Choice == "5":
+            race_simulation()
+        if Choice == "6":
             confermation = input("Are You Sure ? \n")
             if confermation.lower() == "yes":
                 break
