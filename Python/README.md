@@ -12,3 +12,6 @@ pip install googletrans==4.0.0-rc1
 pip install pymysql
 
 pip install mysql-connector-python
+
+pip install tk 
+#if this doesn't work type tkinter instead tk
