@@ -3,6 +3,87 @@ from tkinter import *
 from tkinter import messagebox, simpledialog
 import string
 import random
+from Crypto.Util.Padding import pad, unpad
+def DECRYPTION():
+    def Ask_Data():
+        root = tf.Tk()
+        root.withdraw()
+        message = simpledialog.askstring("Enter the message to decrypt", "Enter the message to decrypt: ")
+        root.destroy()
+        return message
+
+    def Ask_Key():
+        root = tf.Tk()
+        root.withdraw()
+        key = simpledialog.askinteger("Enter the key", "Enter the key: ")
+        root.destroy()
+        return key
+
+    encrypted_message = Ask_Data()
+    if encrypted_message is None:
+        return "No message entered."
+
+    key = Ask_Key()
+    if key is None:
+        return "No key entered."
+
+    decrypted_message = ""
+    key_index = 0
+    for char in encrypted_message:
+        decrypted_message += chr(ord(char) - key)  
+        key_index = (key_index + 1) % len(str(key))
+    return decrypted_message
+def ENCRYPTION():
+    def Ask_Data():
+        root = tf.Tk()
+        root.withdraw()
+        message = simpledialog.askstring("Enter the message to encrypt", "Enter the message to encrypt: ")
+        root.destroy()
+        return message
+
+    def Ask_Key():
+        root = tf.Tk()
+        root.withdraw()
+        key = simpledialog.askinteger("Enter the key", "Enter the key: ")
+        root.destroy()
+        return key
+
+    message = Ask_Data()
+    if message is None:
+        return "No message entered."
+
+    key = Ask_Key()
+    if key is None:
+        return "No key entered."
+
+    encrypted_message = ""
+    key_index = 0
+
+    for char in message:
+        encrypted_message += chr(ord(char) + key)  
+        key_index = (key_index + 1) % len(str(key))
+
+    return encrypted_message
+def cryotograohy_menu():
+    menu_popup = Toplevel(root)
+    menu_popup.title("CrytoGraphy Menu")
+    cryptography_options = "**CrytoGraphy Menu** \n1.Encryption \n2.Decryption\n3.Exit"
+    menu_lable = Label(menu_popup,text=cryptography_options , justify='left' )
+    menu_lable.pack()
+    user_input = Entry(menu_popup)
+    user_input.pack()
+    def cryptography_manger():
+        choice = user_input.get()
+        if choice == '1':
+            result = ENCRYPTION()
+            messagebox.showinfo("Encypted data", result)
+        if choice == '2':
+            result = DECRYPTION()
+            messagebox.showinfo("Decypted data", result)
+        if choice == '3':
+            root.destroy()
+    execute_button = Button(menu_popup, text="Execute", command=cryptography_manger)
+    execute_button.pack()
 def password_generator_Aplhabetical_Upper():
     root = tf.Tk()
     root.withdraw()  
@@ -90,7 +171,6 @@ def password_menu():
 
     execute_button = Button(menu_popup, text="Execute", command=handle_password_choice)
     execute_button.pack()
-
 root = tf.Tk()
 root.title("MENU")
 root.geometry('280x280')
@@ -98,17 +178,18 @@ entry = Entry(root)
 entry.pack()
 LP = Listbox(root)
 LP.insert(1, " 1. Password Generator")
-LP.insert(2,"2. Exit")
+LP.insert(2,"2. Cryptography")
+LP.insert(2,"3. Exit")
 LP.place(x='0', y='10')
 entry.place(x='1', y='176')
-
 def user_input_handler():
     user_input = entry.get()
     if user_input == '1':
         password_menu()
     if user_input == '2':
+        cryotograohy_menu()
+    if user_input == '3':
         root.destroy()
-
 execute_button = Button(root, text="Execute", command=user_input_handler)
 execute_button.place(x=120, y=176)
 
