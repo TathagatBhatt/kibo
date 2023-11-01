@@ -1036,7 +1036,7 @@ def main_menu():
             function_usage["SQL"] += 1
         elif Choice == '12':
             GUI_MENU()
-            function_usage["crypto_password_program"] += 1
+            function_usage["GUI MENU"] += 1
         elif Choice == "13":
             confirmation = input("Are You Sure?\n")
             if confirmation.lower() == "yes":
