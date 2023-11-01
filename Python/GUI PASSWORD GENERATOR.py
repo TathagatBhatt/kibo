@@ -61,8 +61,6 @@ def password_generator_pincode():
 def password_menu():
     menu_popup = Toplevel(root)
     menu_popup.title("Password Menu")
-
-    # Create a password menu in the popup
     password_options = "**PASSWORD_MENU**\n1. Pincode\n2. Alphanumeric\n3. Alphabetically\n4. Lowercase\n5. Uppercase\n6. EXIT"
     menu_label = Label(menu_popup, text=password_options, justify='left')
     menu_label.pack()
@@ -89,8 +87,6 @@ def password_menu():
             messagebox.showinfo("Generated Password", generated_password)
         elif choice == '6':
             menu_popup.destroy()  
-        else:
-            messagebox.showerror("Error", "Invalid input. Please select a valid option.")
 
     execute_button = Button(menu_popup, text="Execute", command=handle_password_choice)
     execute_button.pack()
