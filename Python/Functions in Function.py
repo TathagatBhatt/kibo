@@ -16,7 +16,7 @@ import mysql.connector
 import pymysql
 import matplotlib.pyplot as plt
 import tkinter as tf
-from tkinter import messagebox
+from tkinter import messagebox,simpledialog
 from tkinter import *
 import importlib
 import subprocess
