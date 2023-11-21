@@ -12,14 +12,30 @@ from sympy import rad
 import googletrans
 from googletrans import Translator
 import sympy as sp
-translator = Translator()
-import sympy as sp
 import mysql.connector
 import pymysql
 import matplotlib.pyplot as plt
 import tkinter as tf
 from tkinter import messagebox
 from tkinter import *
+import importlib
+import subprocess
+def install_module(module_name):
+    try:
+        importlib.import_module(module_name)
+    except ImportError:
+        print(f"{module_name} is not installed. Installing...")
+        try:
+            subprocess.call(['pip', 'install', module_name])
+            print(f"{module_name} has been successfully installed.")
+        except Exception as e:
+            print(f"Error installing {module_name}: {e}")
+required_modules = [
+    'sympy','tk','numpy','googletrans==4.0.0-rc1','pymysql','pycryptodome',
+    'mysql-connector-python']
+for module in required_modules:
+    install_module(module)
+translator = Translator()
 def Graph_SQL():
     password = input("Please enter your MySQL password:")
     database = input("Enter the name of the database in question:")
