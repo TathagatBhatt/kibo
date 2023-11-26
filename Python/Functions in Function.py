@@ -20,6 +20,29 @@ from tkinter import messagebox,simpledialog
 from tkinter import *
 import importlib
 import subprocess
+from PyDictionary import PyDictionary
+def dictionary():
+    while True:
+        def get_definition(word):
+            dictionary = PyDictionary()
+            definition = dictionary.meaning(word)
+            if definition:
+                return definition
+            return f"Definition not found for '{word}'."
+        def get_meaning():
+            user_word = input("Enter a word (or type 'dic.close' to exit): ")
+            if user_word == 'dic.close':
+                return False
+            result = get_definition(user_word)
+            if isinstance(result, dict):
+                print(f"Definitions for '{user_word}':")
+                for pos, meanings in result.items():
+                    print(f"{pos.capitalize()}: {', '.join(meanings)}")
+            else:
+                print(result)
+            return True
+        if not get_meaning():
+            break
 def install_module(module_name):
     try:
         importlib.import_module(module_name)
@@ -32,7 +55,7 @@ def install_module(module_name):
             print(f"Error installing {module_name}: {e}")
 required_modules = [
     'sympy','tk','numpy','googletrans==4.0.0-rc1','pymysql','pycryptodome',
-    'mysql-connector-python']
+    'mysql-connector-python','PyDictionary --no-deps']
 for module in required_modules:
     install_module(module)
 translator = Translator()
@@ -469,7 +492,8 @@ function_usage = {
     "Fun Fact" : 0,
     "Translator" : 0,
     "SQL" : 0,
-    "GUI MENU" : 0
+    "GUI MENU" : 0,
+    "Dictionary" : 0
 }
 def read_txt():
     File_Name = input("Enter File Name : ")
@@ -1016,7 +1040,7 @@ def GUI_MENU():
     root.mainloop()
 def main_menu():
     while True:
-        print("***FUNCTION MENU***\n1. Password Function\n2. Stack Function\n3. Calculator\n4. Encryption\n5. Turtle Graphic\n6. File Function\n7. Quiz\n8. Fun Fact \n9. History  \n10.Translator \n11.SQL \n12.GUI MENU \n13.Exit")
+        print("***FUNCTION MENU***\n1. Password Function\n2. Stack Function\n3. Calculator\n4. Encryption\n5. Turtle Graphic\n6. File Function\n7. Quiz\n8. Fun Fact \n9. History  \n10.Translator \n11.SQL \n12.GUI MENU \n13.Dictionary\n14.Exit")
         Choice = input("Select a Function:")
         if Choice == "1":
             main()
@@ -1053,7 +1077,10 @@ def main_menu():
         elif Choice == '12':
             GUI_MENU()
             function_usage["GUI MENU"] += 1
-        elif Choice == "13":
+        elif Choice == '13':
+            dictionary()
+            function_usage["Dictionary"] +=1
+        elif Choice == "14":
             confirmation = input("Are You Sure?\n")
             if confirmation.lower() == "yes":
                 break
