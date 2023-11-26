@@ -55,7 +55,7 @@ def install_module(module_name):
             print(f"Error installing {module_name}: {e}")
 required_modules = [
     'sympy','tk','numpy','googletrans==4.0.0-rc1','pymysql','pycryptodome',
-    'mysql-connector-python','PyDictionary --no-deps','matplotlib']
+    'mysql-connector-python','PyDictionary --no-deps']
 for module in required_modules:
     install_module(module)
 translator = Translator()
@@ -835,6 +835,123 @@ def main():
             if confirmation.lower() == "yes":
                 break
 def GUI_MENU():
+    def Quiz():
+        root = tf.Tk()
+        root.title("***GUI QUIZ***")
+        root.geometry('280x280')
+        entry = Entry(root)
+        entry.pack()
+        LP = tf.Listbox(root)
+        LP.insert(1, " 1. Quiz")
+        LP.insert(2, "2. Exit")
+        LP.place(x='0', y='10')
+        entry.place(x='1', y='176')
+        def Rules():
+                start = tf.simpledialog.askstring("Rules","*THIS IS GENERAL KNOWLEDGE QUIZ \n *THIS QUIZ HAS 10 QUESTIONS \n *EACH CORRECT ANSWER ONE POINT IS REWARDED \n DO YOU WISH TO CONTINUE (yes/no)")
+                if start.lower() == 'yes':
+                        Questions()
+                if start.lower()  == 'no':
+                        return
+        def Questions():
+            points = 0
+            Ans1 = ["neil a.","alden armstrong","neil armstrong","neil alden armstrong","armstrong"]
+            Ans2 = ["sun"]
+            Ans3 = ["everest","mt.everest","mount everest"]
+            Ans4 = ["moon"]
+            Ans5 = ["pluto"]
+            Ans6 =["homosapiens","homosapien"]
+            Ans7 =["gravity"]
+            Ans8 =["mammals","mammal"]
+            Ans9 =["aryabhatt","aryabhata"]
+            Ans10=["east"]
+            Answer1 = tf.simpledialog.askstring("Question.1", "Who was the first man to step on moon ? ")
+            if Answer1.lower() in Ans1:
+                messagebox.showinfo("Correct Answer!!!", "hoorah ! that's the correct answer!")
+                points += 1
+            if Answer1.lower() not in Ans1:
+                messagebox.showinfo("Wrong Answer!!!", "Awwh ! that's not the correct answer!")
+                pass
+            Answer2 = tf.simpledialog.askstring("Question.2", "Name the largest star in our so1ar system ")
+            if Answer2.lower() in Ans2:
+                messagebox.showinfo("Correct Answer!!!", "hoorah ! that's the correct answer!")
+                points += 1
+            if Answer2.lower() not in Ans2:
+                messagebox.showinfo("Wrong Answer!!!", "Awwh ! that's not the correct answer!")
+                pass
+            Answer3 = tf.simpledialog.askstring("Question.3", "What's The Highest Mountain Cliff ?")
+            if Answer3.lower() in Ans3:
+                messagebox.showinfo("Correct Answer!!!", "hoorah ! that's the correct answer!")
+                points += 1
+            if Answer3.lower() not in Ans3:
+                messagebox.showinfo("Wrong Answer!!!", "Awwh ! that's not the correct answer!")
+                pass
+            Answer4 = tf.simpledialog.askstring("Question.4", "What is the name of earth's the natural satellite ?")
+            if Answer4.lower() in Ans4:
+                messagebox.showinfo("Correct Answer!!!", "hoorah ! that's the correct answer!")
+                points += 1
+            if Answer4.lower() not in Ans4:
+                messagebox.showinfo("Wrong Answer!!!", "Awwh ! that's not the correct answer!")
+                pass
+            Answer5 = tf.simpledialog.askstring("Question.5", "Name The Dwarf Planet In Our Solar System")
+            if Answer5.lower() in Ans5:
+                messagebox.showinfo("Correct Answer!!!", "hoorah ! that's the correct answer!")
+                points += 1
+            if Answer5.lower() not in Ans5:
+                messagebox.showinfo("Wrong Answer!!!", "Awwh ! that's not the correct answer!")
+                pass
+            Answer6 = tf.simpledialog.askstring("Question.6", "What is the scientific name of humans ?")
+            if Answer6.lower() in Ans6:
+                messagebox.showinfo("Correct Answer!!!", "hoorah ! that's the correct answer!")
+                points += 1
+            if Answer6.lower() not in Ans6:
+                messagebox.showinfo("Wrong Answer!!!", "Awwh ! that's not the correct answer!")
+                pass
+            Answer7 = tf.simpledialog.askstring("Question.7", "Name the force which pulls us to the ground ")
+            if Answer7.lower() in Ans7:
+                messagebox.showinfo("Correct Answer!!!", "hoorah ! that's the correct answer!")
+                points += 1
+            if Answer7.lower() not in Ans7:
+                messagebox.showinfo("Wrong Answer!!!", "Awwh ! that's not the correct answer!")
+                pass
+            Answer8 = tf.simpledialog.askstring("Question.8", "Name the type of animal that milkfeed their babies")
+            if Answer8.lower() in Ans8:
+                messagebox.showinfo("Correct Answer!!!", "hoorah ! that's the correct answer!")
+                points += 1
+            if Answer8.lower() not in Ans8:
+                messagebox.showinfo("Wrong Answer!!!", "Awwh ! that's not the correct answer!")
+                pass
+            Answer9 = tf.simpledialog.askstring("Question.9", "Who disocvered zero ? ")
+            if Answer9.lower() in Ans9:
+                messagebox.showinfo("Correct Answer!!!", "hoorah ! that's the correct answer!")
+                points += 1
+            if Answer9.lower() not in Ans9:
+                messagebox.showinfo("Wrong Answer!!!", "Awwh ! that's not the correct answer!")
+                pass
+            Answer10 = tf.simpledialog.askstring("Question.10", "From which direction does sun rise from ? ")
+            if Answer10.lower() in Ans10:
+                messagebox.showinfo("Correct Answer!!!", "hoorah ! that's the correct answer!")
+                points += 1
+            if Answer10.lower() not in Ans10:
+                messagebox.showinfo("Wrong Answer!!!", "Awwh ! that's not the correct answer!")
+                pass
+            Name = simpledialog.askstring("Name","Enter Your First Name")
+            while points <=5:
+                messagebox.showinfo("Congrats","Horrah! "+Name+" You Scored "+str(points)+" points out of 10! Nice Try!")
+                return
+            while points <= 8:
+                messagebox.showinfo("Congrats","Horrah! "+Name+" You Scored "+str(points)+" points out of 10! Great!")
+                return
+            while points <= 10:
+                messagebox.showinfo("Congrats","Horrah! "+Name+" You Scored "+str(points)+" points out of 10! Perfect!")
+                return
+        def user_input_handler():
+            user_entry = entry.get()
+            if user_entry == '1':
+                Rules()
+            elif user_entry == '2':
+                root.destroy()
+        execute_button = Button(root, text="Execute", command=user_input_handler)
+        execute_button.place(x=120, y=176)
     def DECRYPTION():
         def Ask_Data():
             root = tf.Tk()
@@ -1021,7 +1138,8 @@ def GUI_MENU():
     LP = tf.Listbox(root)
     LP.insert(1, " 1. Password Generator")
     LP.insert(2, "2. Cryptography")
-    LP.insert(3, "3. Exit")
+    LP.insert(3,"3.Quiz")
+    LP.insert(4, "4. Exit")
     LP.place(x='0', y='10')
     entry.place(x='1', y='176')
 
@@ -1032,6 +1150,8 @@ def GUI_MENU():
         if user_input == '2':
             cryotograohy_menu()
         if user_input == '3':
+            Quiz()
+        if user_input == '4':
             root.destroy()
 
     execute_button = Button(root, text="Execute", command=user_input_handler)
