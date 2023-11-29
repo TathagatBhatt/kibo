@@ -152,7 +152,7 @@ def install_module(module_name):
             print(f"Error installing {module_name}: {e}")
 required_modules = [
     'sympy','tk','numpy','googletrans==4.0.0-rc1','pymysql','pycryptodome',
-    'mysql-connector-python','PyDictionary --no-deps','matplotlib']
+    'mysql-connector-python','PyDictionary --no-deps','matplotlib','pygame']
 for module in required_modules:
     install_module(module)
 translator = Translator()
