@@ -21,6 +21,103 @@ from tkinter import *
 import importlib
 import subprocess
 from PyDictionary import PyDictionary
+import pygame
+import time
+def snake_game():
+    snake_speed = 15
+    window_x, window_y = 720, 480
+    black, white, red, green, blue = pygame.Color(0, 0, 0), pygame.Color(255, 255, 255), pygame.Color(255, 0, 0), pygame.Color(0, 255, 0), pygame.Color(0, 0, 255)
+
+    pygame.init()
+    pygame.display.set_caption('i hate snakeu')
+    game_window = pygame.display.set_mode((window_x, window_y))
+    fps = pygame.time.Clock()
+
+    snake_position = [100, 50]
+    snake_body = [[100, 50], [90, 50], [80, 50], [70, 50]]
+    fruit_position = [random.randrange(1, (window_x//10)) * 10, random.randrange(1, (window_y//10)) * 10]
+    fruit_spawn = True
+
+    direction = 'RIGHT'
+    change_to = direction
+    score = 0
+
+    def show_score(choice, color, font, size):
+        score_font = pygame.font.SysFont(font, size)
+        score_surface = score_font.render('Score : ' + str(score), True, color)
+        score_rect = score_surface.get_rect()
+        game_window.blit(score_surface, score_rect)
+
+    def game_over():
+        my_font = pygame.font.SysFont('times new roman', 50)
+        game_over_surface = my_font.render('Your Score is : ' + str(score), True, red)
+        game_over_rect = game_over_surface.get_rect()
+        game_over_rect.midtop = (window_x/2, window_y/4)
+        game_window.blit(game_over_surface, game_over_rect)
+        pygame.display.flip()
+        time.sleep(2)
+        pygame.quit()
+        quit()
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    change_to = 'UP'
+                if event.key == pygame.K_DOWN:
+                    change_to = 'DOWN'
+                if event.key == pygame.K_LEFT:
+                    change_to = 'LEFT'
+                if event.key == pygame.K_RIGHT:
+                    change_to = 'RIGHT'
+
+        if change_to == 'UP' and direction != 'DOWN':
+            direction = 'UP'
+        if change_to == 'DOWN' and direction != 'UP':
+            direction = 'DOWN'
+        if change_to == 'LEFT' and direction != 'RIGHT':
+            direction = 'LEFT'
+        if change_to == 'RIGHT' and direction != 'LEFT':
+            direction = 'RIGHT'
+
+        if direction == 'UP':
+            snake_position[1] -= 10
+        if direction == 'DOWN':
+            snake_position[1] += 10
+        if direction == 'LEFT':
+            snake_position[0] -= 10
+        if direction == 'RIGHT':
+            snake_position[0] += 10
+
+        snake_body.insert(0, list(snake_position))
+        if snake_position[0] == fruit_position[0] and snake_position[1] == fruit_position[1]:
+            score += 10
+            fruit_spawn = False
+        else:
+            snake_body.pop()
+
+        if not fruit_spawn:
+            fruit_position = [random.randrange(1, (window_x//10)) * 10, random.randrange(1, (window_y//10)) * 10]
+
+        fruit_spawn = True
+        game_window.fill(black)
+
+        for pos in snake_body:
+            pygame.draw.rect(game_window, green, pygame.Rect(pos[0], pos[1], 10, 10))
+        pygame.draw.rect(game_window, white, pygame.Rect(fruit_position[0], fruit_position[1], 10, 10))
+
+        if snake_position[0] < 0 or snake_position[0] > window_x-10:
+            game_over()
+        if snake_position[1] < 0 or snake_position[1] > window_y-10:
+            game_over()
+
+        for block in snake_body[1:]:
+            if snake_position[0] == block[0] and snake_position[1] == block[1]:
+                game_over()
+
+        show_score(1, white, 'times new roman', 20)
+        pygame.display.update()
+        fps.tick(snake_speed)
 def dictionary():
     while True:
         def get_definition(word):
@@ -60,62 +157,76 @@ for module in required_modules:
     install_module(module)
 translator = Translator()
 def Graph_SQL():
-    password = input("Please enter your MySQL password:")
-    database = input("Enter the name of the database in question:")
-    field1 = input("Enter the field name:")
-    field2 = input("Enter the other field name:")
-    table = input("Enter the table name:")
-    name = input("Enter name for graph")
-    query = "SELECT " + field1 + "," + field2 + " FROM " + table + ";"
-    connection = pymysql.connect(host="localhost", user="root", password=password, database=database)
-    cursor = connection.cursor()
-    cursor.execute(query)
-    results = cursor.fetchall()
-    field1_data = []
-    field2_data = []
-    for row in results:
-        field1_data.append(row[0])
-        field2_data.append(row[1])
-    plt.figure(figsize=(10, 6))
-    plt.bar(field1_data, field2_data, color='purple')
-    plt.xlabel(field1_data)
-    plt.ylabel(field2_data)
-    plt.title(name)
-    plt.xticks(rotation=45)
-    plt.show()
-    cursor.close()
-    connection.close()
-def sql():
-    password = input("enter the password:")
-    mydb = mysql.connector.connect(host="localhost",user="root",password=password)
-    cursor = mydb.cursor()
     while True:
-        command = input("input sql command (or exit to exit this function):")
-        if command.lower() == "exit":
-            break
-        cursor.execute(command)
-        if command.strip().lower().startswith("select"):
-            result = cursor.fetchall()
+        try:
+            password = input("Please enter your MySQL password (type 'exit' to go back to the main menu): ")
+            if password.lower() == 'exit':
+                return
+            database = input("Enter the name of the database in question:")
+            field1 = input("Enter the field name:")
+            field2 = input("Enter the other field name:")
+            table = input("Enter the table name:")
+            name = input("Enter name for graph")
+            query = "SELECT " + field1 + "," + field2 + " FROM " + table + ";"
+            connection = pymysql.connect(host="localhost", user="root", password=password, database=database)
+            cursor = connection.cursor()
+            cursor.execute(query)
+            results = cursor.fetchall()
+            field1_data = []
+            field2_data = []
+            for row in results:
+                field1_data.append(row[0])
+                field2_data.append(row[1])
+            plt.figure(figsize=(10, 6))
+            plt.bar(field1_data, field2_data, color='purple')
+            plt.xlabel(field1)
+            plt.ylabel(field2)
+            plt.title(name)
+            plt.xticks(rotation=45)
+            plt.show()
+            cursor.close()
+            connection.close()
+        except pymysql.err.OperationalError:
+            print("Incorrect Password")
+def sql():
+    while True:
+        try:
+            password = input("Enter the password (type 'exit' to go back to the main menu): ")
+            if password.lower() == 'exit':
+                break
+            mydb = mysql.connector.connect(host="localhost", user="root", password=password)
+            cursor = mydb.cursor()
+            result = None  
+            while True:
+                command = input("Input SQL command (type 'exit' to go back to the main menu): ")
+                if command.lower() == 'exit':
+                    break  
+                cursor.execute(command)
+                if command.strip().lower().startswith("select"):
+                    result = cursor.fetchall()
             if result:
                 for data in result:
                     print(data)
-        for X in cursor :
-            print(X)
-        mydb.commit()
-    cursor.close()
-    mydb.close()
+            mydb.commit()
+            cursor.close()
+            mydb.close()
+        except mysql.connector.errors.ProgrammingError:
+            print("Incorrect Password")
 def SQL_MENU():
     while True:
-        print("***SQL MENU*** \n1.SQL COMMAND LINE \n2.Graph \n3.EXIT")
-        choice = input("select an option :")
-        if choice == "1":
-            sql()
-        if choice == "2":
-            Graph_SQL()
-        if choice == "3":
-            confrimation=input("are you sure ?(yes/no)\n")
-            if confrimation == "yes":
-                break
+        try:
+            print("***SQL MENU*** \n1.SQL COMMAND LINE \n2.Graph \n3.EXIT")
+            choice = int(input("select an option :"))
+            if choice == 1:
+                sql()
+            if choice == 2:
+                Graph_SQL()
+            if choice == 3:
+                confirmation = input("are you sure? (yes/no)\n")
+                if confirmation.lower() == "yes":
+                    break
+        except ValueError:
+            print('Invalid Input!!')
 def definite_integration():
     var = input("Enter the variable of integration: ")
     function_str = input("Enter the function to integrate: ")
@@ -493,7 +604,8 @@ function_usage = {
     "Translator" : 0,
     "SQL" : 0,
     "GUI MENU" : 0,
-    "Dictionary" : 0
+    "Dictionary" : 0,
+    "Snake Game" : 0
 }
 def read_txt():
     File_Name = input("Enter File Name : ")
@@ -1159,49 +1271,62 @@ def GUI_MENU():
 
     root.mainloop()
 def main_menu():
-    while True:
-        print("***FUNCTION MENU***\n1. Password Function\n2. Stack Function\n3. Calculator\n4. Encryption\n5. Turtle Graphic\n6. File Function\n7. Quiz\n8. Fun Fact \n9. History  \n10.Translator \n11.SQL \n12.GUI MENU \n13.Dictionary\n14.Exit")
-        Choice = input("Select a Function:")
-        if Choice == "1":
-            main()
-            function_usage["Password Function"] += 1
-        elif Choice == "2":
-            Stack()
-            function_usage["Stack Function"] += 1
-        elif Choice == "3":
-            Calculate()
-            function_usage["Calculator"] += 1
-        elif Choice == "4":
-            Encryptor()
-            function_usage["Encryption"] += 1
-        elif Choice == "5":
-            Turtle_Menu()
-            function_usage["Turtle Graphic"] += 1
-        elif Choice == "6":
-            File_Handle_Menu()
-            function_usage["File Function"] += 1
-        elif Choice == "7":
-            Quiz()
-            function_usage["Quiz"] += 1
-        elif Choice == "8":
-            Fact_Lab()
-            function_usage["Fun Fact"] += 1
-        elif Choice == "9":
-            print("Most frequently used function:", most_frequently_used_function())
-        elif Choice == "10":
-            Translation_Menu()
-            function_usage["Translator"] += 1
-        elif Choice == "11":
-            SQL_MENU()
-            function_usage["SQL"] += 1
-        elif Choice == '12':
-            GUI_MENU()
-            function_usage["GUI MENU"] += 1
-        elif Choice == '13':
-            dictionary()
-            function_usage["Dictionary"] +=1
-        elif Choice == "14":
-            confirmation = input("Are You Sure?\n")
-            if confirmation.lower() == "yes":
-                break
+    try:
+        while True:
+            print("***FUNCTION MENU***\n1. Password Function\n2. Stack Function\n3. Calculator\n4. Encryption\n5. Turtle Graphic\n6. File Function\n7. Quiz\n8. Fun Fact \n9. History  \n10.Translator \n11.SQL \n12.GUI MENU \n13.Dictionary\n14.Snake Game \n15.Exit")
+            Choice = int(input("Select a Function:"))
+            if Choice == 1:
+                main()
+                function_usage["Password Function"] += 1
+            elif Choice == 2:
+                Stack()
+                function_usage["Stack Function"] += 1
+            elif Choice == 3:
+                Calculate()
+                function_usage["Calculator"] += 1
+            elif Choice == 4:
+                Encryptor()
+                function_usage["Encryption"] += 1
+            elif Choice == 5:
+                Turtle_Menu()
+                function_usage["Turtle Graphic"] += 1
+            elif Choice == 6:
+                File_Handle_Menu()
+                function_usage["File Function"] += 1
+            elif Choice == 7:
+                Quiz()
+                function_usage["Quiz"] += 1
+            elif Choice == 8:
+                Fact_Lab()
+                function_usage["Fun Fact"] += 1
+            elif Choice == 9:
+                print("Most frequently used function:", most_frequently_used_function())
+            elif Choice == 10:
+                Translation_Menu()
+                function_usage["Translator"] += 1
+            elif Choice == 11:
+                SQL_MENU()
+                function_usage["SQL"] += 1
+            elif Choice == 12:
+                GUI_MENU()
+                function_usage["GUI MENU"] += 1
+            elif Choice == 13:
+                dictionary()
+                function_usage["Dictionary"] +=1
+            elif Choice == 14:
+                snake_game()
+                function_usage["Snake Game"] +=1
+            elif Choice == 15:
+                try:
+                    confirmation = input("Are You Sure?\n")
+                    if confirmation.lower() == "yes":
+                        break
+                    elif confirmation.lower()=='no':
+                        return None
+                    else :
+                        print('None of the options was selected!')
+                except ValueError :
+                    print('Invalid Input')
+    except ValueError:
+        print('Invalid Input!')
 main_menu()
