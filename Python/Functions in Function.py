@@ -1,6 +1,23 @@
 import string
 import random
 import os
+import importlib
+import subprocess
+def install_module(module_name):
+    try:
+        importlib.import_module(module_name)
+    except ImportError:
+        print(f"{module_name} is not installed. Installing...")
+        try:
+            subprocess.call(['pip', 'install', module_name])
+            print(f"{module_name} has been successfully installed.")
+        except Exception as e:
+            print(f"Error installing {module_name}: {e}")
+required_modules = [
+    'sympy','--upgrade setuptools','tk','numpy','googletrans==4.0.0-rc1','pymysql','pycryptodome',
+    'mysql-connector-python','--update futures','matplotlib','pygame','--upgrade --force-reinstall --no-cache-dir PyDictionary']
+for module in required_modules:
+    install_module(module)
 import sympy
 import turtle
 from Crypto.Cipher import AES
@@ -18,8 +35,6 @@ import matplotlib.pyplot as plt
 import tkinter as tf
 from tkinter import messagebox,simpledialog
 from tkinter import *
-import importlib
-import subprocess
 from PyDictionary import PyDictionary
 import pygame
 import time
@@ -140,21 +155,6 @@ def dictionary():
             return True
         if not get_meaning():
             break
-def install_module(module_name):
-    try:
-        importlib.import_module(module_name)
-    except ImportError:
-        print(f"{module_name} is not installed. Installing...")
-        try:
-            subprocess.call(['pip', 'install', module_name])
-            print(f"{module_name} has been successfully installed.")
-        except Exception as e:
-            print(f"Error installing {module_name}: {e}")
-required_modules = [
-    'sympy','tk','numpy','googletrans==4.0.0-rc1','pymysql','pycryptodome',
-    'mysql-connector-python','PyDictionary --no-deps','matplotlib','pygame']
-for module in required_modules:
-    install_module(module)
 translator = Translator()
 def Graph_SQL():
     while True:
