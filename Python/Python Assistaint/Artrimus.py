@@ -49,20 +49,28 @@ def takeCommand():
         query = None
     return query
 query = takeCommand()
-
+user_query = query.lower()
 # execute tasks as per user query
 spotify_path = ''
 chrome_path = 'C:/Program Files/Google/Chrome/Application/chrome.exe %s'
-if 'wikipedia' in query.lower():
+if 'wikipedia' in user_query:
     speak('Searching wikipedia')
     query = query.replace('wikipedia','')
     results = wikipedia.summary(query,sentences = 4)
     speak(results)
-elif 'youtube' in query.lower():
+    url = 'wikipedia.com'
+    webbrowser.get(chrome_path).open(url)
+elif 'youtube' in user_query:
     speak("opening Youtube...")
     url = 'youtube.com'
     webbrowser.get(chrome_path).open(url)
-    webbrowser.get(chrome_path).open(url)
-elif 'spotify' in query.lower():
+elif 'spotify' in user_query:
     speak("opening Spotify...")
     os.system('start spotify://')
+elif 'play music' in user_query:
+    song_dir = "C:\\Users\\tatha\\Music\\Music"
+    song = os.listdir(song_dir)
+    os.startfile(os.path.join(song_dir,song[0]))
+elif 'time' in user_query:
+    strTime = datetime.datetime().strftime("%H:%M:%S")
+    speak("it's currently",strTime)
