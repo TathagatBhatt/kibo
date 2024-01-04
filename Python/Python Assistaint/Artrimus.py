@@ -53,18 +53,26 @@ user_query = query.lower()
 # execute tasks as per user query
 spotify_path = ''
 chrome_path = 'C:/Program Files/Google/Chrome/Application/chrome.exe %s'
-if 'wikipedia' in user_query:
+if 'according to wikipedia' in user_query:
     speak('Searching wikipedia')
-    query = query.replace('wikipedia','')
+    query = query.replace('according to wikipedia','')
     results = wikipedia.summary(query,sentences = 4)
     speak(results)
+elif 'search on google' in user_query:
+    speak("What do you want to search for on Google?")
+    search_query = takeCommand().lower()
+    google_search_url = f"https://www.google.com/search?q={search_query}"
+    speak("Searching on Google...")
+    webbrowser.get(chrome_path).open(google_search_url)
+elif 'open wikipedia' in user_query:
+    speak("opening Wikipedia...")
     url = 'wikipedia.com'
     webbrowser.get(chrome_path).open(url)
-elif 'youtube' in user_query:
+elif 'open youtube' in user_query:
     speak("opening Youtube...")
     url = 'youtube.com'
     webbrowser.get(chrome_path).open(url)
-elif 'spotify' in user_query:
+elif 'open spotify' in user_query:
     speak("opening Spotify...")
     os.system('start spotify://')
 elif 'play music' in user_query:
@@ -72,5 +80,5 @@ elif 'play music' in user_query:
     song = os.listdir(song_dir)
     os.startfile(os.path.join(song_dir,song[0]))
 elif 'time' in user_query:
-    strTime = datetime.datetime().strftime("%H:%M:%S")
-    speak("it's currently",strTime)
+    strTime = datetime.datetime.now().strftime("%H:%M:%S")
+    speak("it's currently"+strTime)
