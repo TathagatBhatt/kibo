@@ -3,6 +3,7 @@ import random
 import os
 import importlib
 import subprocess
+import Artrimus
 def install_module(module_name):
     try:
         importlib.import_module(module_name)
@@ -605,7 +606,8 @@ function_usage = {
     "SQL" : 0,
     "GUI MENU" : 0,
     "Dictionary" : 0,
-    "Snake Game" : 0
+    "Snake Game" : 0,
+    "Artrimus" : 0
 }
 def read_txt():
     File_Name = input("Enter File Name : ")
@@ -1273,7 +1275,7 @@ def GUI_MENU():
 def main_menu():
     try:
         while True:
-            print("***FUNCTION MENU***\n1. Password Function\n2. Stack Function\n3. Calculator\n4. Encryption\n5. Turtle Graphic\n6. File Function\n7. Quiz\n8. Fun Fact \n9. History  \n10.Translator \n11.SQL \n12.GUI MENU \n13.Dictionary\n14.Snake Game \n15.Exit")
+            print("***FUNCTION MENU***\n1. Password Function\n2. Stack Function\n3. Calculator\n4. Encryption\n5. Turtle Graphic\n6. File Function\n7. Quiz\n8. Fun Fact \n9. History  \n10.Translator \n11.SQL \n12.GUI MENU \n13.Dictionary\n14.Snake Game \n16.Artrimus \n15.Exit")
             Choice = int(input("Select a Function:"))
             if Choice == 1:
                 main()
@@ -1317,12 +1319,16 @@ def main_menu():
                 snake_game()
                 function_usage["Snake Game"] +=1
             elif Choice == 15:
+                function_usage["Artrimus"] +=1
+                Artrimus.Wish_User()
+                Artrimus.Input()
+            elif Choice == 16:
                 try:
                     confirmation = input("Are You Sure?\n")
                     if confirmation.lower() == "yes":
                         break
                     elif confirmation.lower()=='no':
-                        return None
+                        pass
                     else :
                         print('None of the options was selected!')
                 except ValueError :

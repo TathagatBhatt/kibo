@@ -38,7 +38,6 @@ def speak(text, language='en'):
     engine.say(text)
     engine.runAndWait()
 
-speak("Initializing Artrimus...",language='en')
 
 # Facts collection
 
@@ -80,7 +79,8 @@ def wishMe():
     else :
         speak("Good Evening",language='en')
     speak('How may i help you ?',language='en')   
-wishMe()
+def Wish_User():
+    wishMe()
 # take command from user via a microphone
 def takeCommand():
     r = sr.Recognizer()
@@ -95,48 +95,49 @@ def takeCommand():
         speak("Say That Again Please",language='en')
         query = None
     return query
-query = takeCommand()
-# execute tasks as per user query
-spotify_path = ''
-chrome_path = 'C:/Program Files/Google/Chrome/Application/chrome.exe %s'
-if 'according to wikipedia' in query.lower():
-    speak('Searching wikipedia',language='en')
-    query = query.replace('according to wikipedia','')
-    results = wikipedia.summary(query,sentences = 4)
-    speak(results,language='en')
-elif 'search on google' in query.lower():
-    speak("What do you want to search for on Google?",language='en')
-    search_query = takeCommand().lower()
-    google_search_url = f"https://www.google.com/search?q={search_query}"
-    speak("Searching on Google...",language='en')
-    webbrowser.get(chrome_path).open(google_search_url)
-elif 'open wikipedia' in query.lower():
-    speak("opening Wikipedia...",language='en')
-    url = 'wikipedia.com'
-    webbrowser.get(chrome_path).open(url)
-elif 'open youtube' in query.lower():
-    speak("opening Youtube...",language='en')
-    url = 'youtube.com'
-    webbrowser.get(chrome_path).open(url)
-elif 'open spotify' in query.lower():
-    speak("opening Spotify...",language='en')
-    os.system('start spotify://')
-elif 'play music' in query.lower():
-    song_dir = "C:\\Users\\tatha\\Music\\Music"
-    song = os.listdir(song_dir)
-    os.startfile(os.path.join(song_dir,song[0]))
-elif 'time' in query.lower():
-    current_time = datetime.datetime.now().strftime("%I:%M %p")
-    time_parts = current_time.split(':')
-    hours = time_parts[0]
-    minutes_period = time_parts[1].split()
-    minutes = minutes_period[0]
-    period = minutes_period[1]
-    speak("It's currently " + hours + " " + minutes + " " + period,language='en')
-elif 'translater' or 'translator' in query.lower():
-    speak("which language do you want to translate to or from ?",language='en')
-    language_query = takeCommand().lower()
-    if 'from japanese' in language_query.lower():
+def Input():
+    query = takeCommand()
+    # execute tasks as per user query
+    spotify_path = ''
+    chrome_path = 'C:/Program Files/Google/Chrome/Application/chrome.exe %s'
+    if 'according to wikipedia' in query.lower():
+        speak('Searching wikipedia',language='en')
+        query = query.replace('according to wikipedia','')
+        results = wikipedia.summary(query,sentences = 4)
+        speak(results,language='en')
+    elif 'search on google' in query.lower():
+        speak("What do you want to search for on Google?",language='en')
+        search_query = takeCommand().lower()
+        google_search_url = f"https://www.google.com/search?q={search_query}"
+        speak("Searching on Google...",language='en')
+        webbrowser.get(chrome_path).open(google_search_url)
+    elif 'open wikipedia' in query.lower():
+        speak("opening Wikipedia...",language='en')
+        url = 'wikipedia.com'
+        webbrowser.get(chrome_path).open(url)
+    elif 'open youtube' in query.lower():
+        speak("opening Youtube...",language='en')
+        url = 'youtube.com'
+        webbrowser.get(chrome_path).open(url)
+    elif 'open spotify' in query.lower():
+        speak("opening Spotify...",language='en')
+        os.system('start spotify://')
+    elif 'play music' in query.lower():
+        song_dir = "C:\\Users\\tatha\\Music\\Music"
+        song = os.listdir(song_dir)
+        os.startfile(os.path.join(song_dir,song[0]))
+    elif 'time' in query.lower():
+        current_time = datetime.datetime.now().strftime("%I:%M %p")
+        time_parts = current_time.split(':')
+        hours = time_parts[0]
+        minutes_period = time_parts[1].split()
+        minutes = minutes_period[0]
+        period = minutes_period[1]
+        speak("It's currently " + hours + " " + minutes + " " + period,language='en')
+    elif 'translater' or 'translator' in query.lower():
+        speak("which language do you want to translate to or from ?",language='en')
+        language_query = takeCommand().lower()
+        if 'from japanese' in language_query.lower():
             r = sr.Recognizer()
             with sr.Microphone() as source :
                 print("Listening...")
@@ -145,50 +146,50 @@ elif 'translater' or 'translator' in query.lower():
                 japanese_text = r.recognize_google(audio, language = 'ja-JP')
                 english_translation = translator.translate(japanese_text, src='ja', dest='en')
                 speak("The English translation is: " + english_translation.text,language='en')
-    elif 'from korean' in language_query.lower():
-        r = sr.Recognizer()
-        with sr.Microphone() as source :
-            print("Listening...")
-            speak("What do you want to tanslate ?",language='en')
-            audio = r.listen(source)
-            Korean_text = r.recognize_google(audio, language = 'ko-KR')
-            english_translation = translator.translate(Korean_text, src='ko', dest='en')
-            speak("The English translation is: " + english_translation.text,language='en')
-    elif 'from hindi' in language_query.lower():
-        r = sr.Recognizer()
-        with sr.Microphone() as source :
-            print("Listening...")
-            speak("What do you want to tanslate ?",language='en')
-            audio = r.listen(source)
-            Hindi_text = r.recognize_google(audio, language = 'hi-IN')
-            english_translation = translator.translate(Hindi_text, src='hi', dest='en')
-            speak("The English translation is: " + english_translation.text,language='en')
-    elif 'to japanese' in language_query.lower():
-         r = sr.Recognizer()
-         with sr.Microphone() as source :
-            print("Listening...")
-            speak("What do you want to tanslate ?",language='en')
-            audio = r.listen(source)
-            english_text = r.recognize_google(audio, language = 'en-IN')
-            japanese_translation = translator.translate(english_text, src='en', dest='ja')
-            speak(japanese_translation.text,language='ja')
-    elif 'to korean' in language_query.lower():
-         r = sr.Recognizer()
-         with sr.Microphone() as source :
-            print("Listening...")
-            speak("What do you want to tanslate ?",language='en')
-            audio = r.listen(source)
-            english_text = r.recognize_google(audio, language = 'en-IN')
-            korean_translation = translator.translate(english_text, src='en', dest='ko')
-            speak(korean_translation.text,language='ko')
-    elif 'to hindi' in language_query.lower():
-         r = sr.Recognizer()
-         with sr.Microphone() as source :
-            print("Listening...")
-            speak("What do you want to tanslate ?",language='en')
-            audio = r.listen(source)
-            english_text = r.recognize_google(audio, language = 'en-IN')
-            hindi_translation = translator.translate(english_text, src='en', dest='hi')
-            speak(hindi_translation.text,language='hi')
-elif "fact" in query.lower():
-    speak(r.choice(Fact_lib))
+        elif 'from korean' in language_query.lower():
+            r = sr.Recognizer()
+            with sr.Microphone() as source :
+                print("Listening...")
+                speak("What do you want to tanslate ?",language='en')
+                audio = r.listen(source)
+                Korean_text = r.recognize_google(audio, language = 'ko-KR')
+                english_translation = translator.translate(Korean_text, src='ko', dest='en')
+                speak("The English translation is: " + english_translation.text,language='en')
+        elif 'from hindi' in language_query.lower():
+            r = sr.Recognizer()
+            with sr.Microphone() as source :
+                print("Listening...")
+                speak("What do you want to tanslate ?",language='en')
+                audio = r.listen(source)
+                Hindi_text = r.recognize_google(audio, language = 'hi-IN')
+                english_translation = translator.translate(Hindi_text, src='hi', dest='en')
+                speak("The English translation is: " + english_translation.text,language='en')
+        elif 'to japanese' in language_query.lower():
+             r = sr.Recognizer()
+             with sr.Microphone() as source :
+                print("Listening...")
+                speak("What do you want to tanslate ?",language='en')
+                audio = r.listen(source)
+                english_text = r.recognize_google(audio, language = 'en-IN')
+                japanese_translation = translator.translate(english_text, src='en', dest='ja')
+                speak(japanese_translation.text,language='ja')
+        elif 'to korean' in language_query.lower():
+            r = sr.Recognizer()
+            with sr.Microphone() as source :
+                print("Listening...")
+                speak("What do you want to tanslate ?",language='en')
+                audio = r.listen(source)
+                english_text = r.recognize_google(audio, language = 'en-IN')
+                korean_translation = translator.translate(english_text, src='en', dest='ko')
+                speak(korean_translation.text,language='ko')
+        elif 'to hindi' in language_query.lower():
+            r = sr.Recognizer()
+            with sr.Microphone() as source :
+                print("Listening...")
+                speak("What do you want to tanslate ?",language='en')
+                audio = r.listen(source)
+                english_text = r.recognize_google(audio, language = 'en-IN')
+                hindi_translation = translator.translate(english_text, src='en', dest='hi')
+                speak(hindi_translation.text,language='hi')
+    elif "fact" in query.lower():
+        speak(r.choice(Fact_lib))
